@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_ru_sberbank_jms_util_domain_JmsConfiguration" items="${jmsconfigurations}" z="z+lfL44xe7omZnsQ4VWDevs3gCk=">
+        <table:table data="${jmsconfigurations}" id="l_ru_sberbank_jms_util_domain_JmsConfiguration" path="/jmsconfigurations" z="Tj0c7OfHpZCQiG7DY/sGnPI57Sk=">
+            <table:column id="c_ru_sberbank_jms_util_domain_JmsConfiguration_url" property="url" z="WUssIryiAiO4YNrCEZRr9x80wBI="/>
+        </table:table>
+    </page:list>
+</div>

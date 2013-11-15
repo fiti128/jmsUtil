@@ -1,0 +1,10 @@
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-15 15:06:21
+hint
+project --topLevelPackage ru.sberbank.jms.util --java 5 --projectName jmsUtil
+hint
+controller all --package ~.web
+hint
+jpa setup --provider HIBERNATE --database HYPERSONIC_IN_MEMORY 
+entity jpa --class ~.domain.JmsConfiguration --testAutomatically 
+field string --fieldName url --notNull --sizeMin 3
+web mvc all --package ~.web
