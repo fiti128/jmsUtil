@@ -16,14 +16,20 @@
 	</head>
 	
   	<body class="container">
-  	
+
    		<div id="wrapper">
 		    <tiles:insertAttribute name="header" ignore="true" />
-		    <tiles:insertAttribute name="menu" ignore="true" />   
-		    <div id="main">
-	    		<tiles:insertAttribute name="body"/> 
-		    	<tiles:insertAttribute name="footer" ignore="true"/>
+                <tiles:insertAttribute name="configuration" ignore="true" />
+		    <div id="main" class="row">
+                <div class="col-md-6">
+                    <tiles:insertAttribute name="body-left" ignore="true" />
+                </div>
+                <div class="col-md-6">
+	    		    <tiles:insertAttribute name="body-right" ignore="true" />
+                </div>
 		    </div>
+                <tiles:insertAttribute name="body" ignore="true" />
+		    	<tiles:insertAttribute name="footer" ignore="true"/>
 		</div>
 	</body>
 </html>

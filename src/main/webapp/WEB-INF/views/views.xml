@@ -6,7 +6,9 @@
 <tiles-definitions>
 
   <definition name="index" extends="default">
-    <put-attribute name="body" value="/WEB-INF/views/index.jspx" />
+     <put-attribute name="configuration" value="/WEB-INF/views/configuration.jspx" />
+     <put-attribute name="body-right" value="/WEB-INF/views/body-right.jspx" />
+     <put-attribute name="body-left" value="/WEB-INF/views/body-left.jspx" />
   </definition>
 
   <definition name="dataAccessFailure" extends="public">
