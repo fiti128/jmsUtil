@@ -4,7 +4,6 @@
 	"http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 
 <tiles-definitions>
-
   <definition name="index" extends="default">
      <put-attribute name="configuration" value="/WEB-INF/views/configuration.jspx" />
      <put-attribute name="body-right" value="/WEB-INF/views/body-right.jspx" />

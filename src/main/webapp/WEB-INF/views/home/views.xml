@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+	"-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+	"http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+    <definition name="home" extends="default">
+        <put-attribute name="configuration" value="/WEB-INF/views/configuration.jspx" />
+        <put-attribute name="body-right" value="/WEB-INF/views/body-right.jspx" />
+        <put-attribute name="body-left" value="/WEB-INF/views/body-left.jspx" />
+    </definition>
+
+</tiles-definitions>
