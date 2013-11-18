@@ -3,14 +3,18 @@
 <tiles-definitions>
     <definition extends="default" name="jmsconfigurations/list">
         <put-attribute name="body" value="/WEB-INF/views/jmsconfigurations/list.jspx"/>
+        <put-attribute name="footer" value="/WEB-INF/views/footer.jspx" />
     </definition>
 <definition extends="default" name="jmsconfigurations/show">
         <put-attribute name="body" value="/WEB-INF/views/jmsconfigurations/show.jspx"/>
+        <put-attribute name="footer" value="/WEB-INF/views/footer.jspx" />
     </definition>
 <definition extends="default" name="jmsconfigurations/create">
         <put-attribute name="body" value="/WEB-INF/views/jmsconfigurations/create.jspx"/>
+        <put-attribute name="footer" value="/WEB-INF/views/footer.jspx" />
     </definition>
 <definition extends="default" name="jmsconfigurations/update">
         <put-attribute name="body" value="/WEB-INF/views/jmsconfigurations/update.jspx"/>
+        <put-attribute name="footer" value="/WEB-INF/views/footer.jspx" />
     </definition>
 </tiles-definitions>

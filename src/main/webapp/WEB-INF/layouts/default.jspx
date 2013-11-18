@@ -2,8 +2,8 @@
 	
 	<jsp:output doctype-root-element="HTML" doctype-system="about:legacy-compat" />
 	
-	<jsp:directive.page contentType="text/html;charset=UTF-8" />  
-	<jsp:directive.page pageEncoding="UTF-8" /> 
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:directive.page pageEncoding="UTF-8" />
 			
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -19,15 +19,23 @@
 
    		<div id="wrapper">
 		    <tiles:insertAttribute name="header" ignore="true" />
+
+
                 <tiles:insertAttribute name="configuration" ignore="true" />
-		    <div id="main" class="row">
-                <div class="col-md-6">
-                    <tiles:insertAttribute name="body-left" ignore="true" />
+
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <tiles:insertAttribute name="body-left" ignore="true" />
+                    </div>
+                    <div class="col-md-6">
+
+	    		        <tiles:insertAttribute name="body-right" ignore="true" />
+                    </div>
                 </div>
-                <div class="col-md-6">
-	    		    <tiles:insertAttribute name="body-right" ignore="true" />
-                </div>
-		    </div>
+
+
+
                 <tiles:insertAttribute name="body" ignore="true" />
 		    	<tiles:insertAttribute name="footer" ignore="true"/>
 		</div>

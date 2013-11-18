@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:spring="http://www.springframework.org/tags" id="menu" version="2.0">
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:spring="http://www.springframework.org/tags" id="body-left" class="well" version="2.0">
     <spring:message var="app_name" code="application_name" htmlEscape="false" />
     <spring:message code="global_menu_new" var="menu_new" arguments="${app_name}" htmlEscape="false"/>
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
 
-    <h3> In left body </h3>
+    <script>
+        $(function () {
+            $('#fileupload').fileupload({
+                dataType: 'json',
+                success: function(response) {
+                    var result = $('#result');
+                    result.text(response.url);
+                    result.attr('hidden',false);
+                }
+            });
+        });
+    </script>
+    <form>
+        <input id="fileupload" type="file" name="files[]" data-url="upload"/>
+        <br/>
+        <pre  id="result" hidden="true"></pre>
+    </form>
 </div>

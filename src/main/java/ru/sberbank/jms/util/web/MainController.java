@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Required;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,8 @@ import ru.sberbank.jms.util.domain.MqConfig;
  */
 @Controller
 public class MainController {
+//	@Value("#{button_home}")
+    String home="home";
 
     @RequestMapping(value="/test", method = RequestMethod.GET, produces = "text/html")
     public String showPage(Model uiModel) {
@@ -49,6 +52,7 @@ public class MainController {
         for (String s : configurationList) {
             System.out.println(s);
         }
+        System.out.println(home);
         JmsConfiguration jmsConfiguration = new JmsConfiguration();
         uiModel.addAttribute("jmsConfig",jmsConfiguration);
         uiModel.addAttribute("configurationList",configurationList);
@@ -58,9 +62,12 @@ public class MainController {
     @RequestMapping(value = "/getConfigurationList", method = RequestMethod.POST)
     public @ResponseBody
     JmsConfiguration getJmsConfigurationList(@RequestParam(required = false) String name) {
-        if(name!=null) System.out.println(name);
+        String result = "good Url";
+        if(name!=null) {
+            result = name;
+        }
         JmsConfiguration jmsConfiguration = new JmsConfiguration();
-        jmsConfiguration.setUrl("good Url");
+        jmsConfiguration.setUrl(result);
          return jmsConfiguration;
     }
 }

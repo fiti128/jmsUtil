@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:form="http://www.springframework.org/tags/form" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:spring="http://www.springframework.org/tags" id="menu" version="2.0">
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:form="http://www.springframework.org/tags/form" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:spring="http://www.springframework.org/tags" id="configuration"  version="2.0">
     <spring:message var="configuration" code="label_ru_sberbank_jms_util_domain_jmsconfiguration" htmlEscape="false" />
     <spring:message code="global_menu_new" var="menu_new" arguments="${configuration}" htmlEscape="false"/>
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
@@ -13,11 +13,6 @@
             </a>
         </div>
         <div class="col-md-6">
-            <h3> In configuration </h3>
-        </div>
-    </div>
-    <div id="selection">
-        <form>
             <div class="text-center">
                 <select id="selection" onchange="madeAjaxCall()">
                     <option>Выберите Конфигурацию</option>
@@ -26,6 +21,12 @@
                     </c:forEach>
                 </select>
             </div>
+          </div>
+    </div>
+    <br/>
+    <div id="selection">
+        <form>
+
             <div class="form-horizontal">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -49,9 +50,8 @@
             console.info(confValue);
             $.ajax({
                 type: "post",
-//                data: ({name : $('#selection').value}),
                 data: ({name : confValue}),
-                url: "http://localhost:8081/roo/getConfigurationList",
+                url: "getConfigurationList",
                 success: function(response) {
                     $('#url').text(response.url);
                 },
