@@ -12,6 +12,7 @@
   <spring:url value="/resources/images/favicon.ico" var="favicon" />
   <spring:url value="/resources/js/jquery.fileupload.js" var="fileupload_url"/>
   <spring:url value="/resources/js/jquery.iframe-transport.js" var="transport_url"/>
+  <spring:url value="/resources/js/jms.util.js" var="jms_util_url"/>
   <spring:url value="/resources/js/vendor/jquery.ui.widget.js" var="widjet_url"/>
   <link rel="stylesheet" type="text/css" href="${tundra_url}" />
   <link rel="stylesheet" type="text/css" media="screen" href="${roo_css_url}" />
@@ -32,6 +33,7 @@
   <script src="${widjet_url}" type="text/javascript"><!-- required for FF3 and Opera --></script>
   <script src="${transport_url}" type="text/javascript"><!-- required for FF3 and Opera --></script>
   <script src="${fileupload_url}" type="text/javascript"><!-- required for FF3 and Opera --></script>
+  <script src="${jms_util_url}" type="text/javascript"><!-- required for FF3 and Opera --></script>
   <script language="JavaScript" type="text/javascript">dojo.require("dojo.parser");</script>
 
 </jsp:root>

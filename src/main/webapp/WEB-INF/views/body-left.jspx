@@ -5,21 +5,10 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
 
-    <script>
-        $(function () {
-            $('#fileupload').fileupload({
-                dataType: 'json',
-                success: function(response) {
-                    var result = $('#result');
-                    result.text(response.url);
-                    result.attr('hidden',false);
-                }
-            });
-        });
-    </script>
+
     <form>
         <input id="fileupload" type="file" name="files[]" data-url="upload"/>
         <br/>
-        <pre  id="result" hidden="true"></pre>
+        <pre id="result" hidden="true"> </pre>
     </form>
 </div>
