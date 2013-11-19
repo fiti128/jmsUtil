@@ -1,10 +1,12 @@
 package ru.sberbank.jms.util.web;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.jmx.support.MBeanServerConnectionFactoryBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import ru.sberbank.jms.util.domain.JmsConfiguration;
 import ru.sberbank.jms.util.domain.MqConfig;
+
+import javax.annotation.Resource;
+import javax.management.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -26,6 +31,8 @@ import ru.sberbank.jms.util.domain.MqConfig;
 public class MainController {
 //	@Value("#{button_home}")
     String home="home";
+    @Resource(name = "mBeanServerClient")
+    MBeanServerConnection mBeanServerConnection;
 
     @RequestMapping(value="/test", method = RequestMethod.GET, produces = "text/html")
     public String showPage(Model uiModel) {
@@ -41,14 +48,22 @@ public class MainController {
         return "redirect:/";
     }
     @RequestMapping(value="/" ,method = RequestMethod.GET)
-    public String showMainPage(Model uiModel) {
+    public String showMainPage(Model uiModel)  {
         List<JmsConfiguration> list = JmsConfiguration.findJmsConfigurationEntries(0,10);
         System.out.println(list.size());
         List<String> configurationList = new ArrayList<String>();
-        
+        System.out.println(mBeanServerConnection);
         for (JmsConfiguration config : list) {
             configurationList.add(config.getConfigurationName());
         }
+
+        try {
+            System.out.println(mBeanServerConnection.getAttribute(
+                    new ObjectName("legres:name=DataSource"),"Url"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         JmsConfiguration jmsConfiguration = new JmsConfiguration();
         uiModel.addAttribute("jmsConfig",jmsConfiguration);
         uiModel.addAttribute("configurationList",configurationList);
