@@ -5,7 +5,7 @@
  * Time: 16:18
  * To change this template use File | Settings | File Templates.
  */
-function madeAjaxCall(thisId,url,id) {
+function madeAjaxCall(thisId,url) {
     var confValue = $('#'+thisId+' option:selected').val();
     console.info(confValue);
     $.ajax({
@@ -13,7 +13,11 @@ function madeAjaxCall(thisId,url,id) {
         data: ({name : confValue}),
         url: url,
         success: function(response) {
-            $('#'+id).text(response.url);
+            $('#configurationNameId').text(response.configurationName);
+            $('#urlId').text(response.url);
+            $('#delayId').text(response.delay);
+            $('#queueId').text(response.queueName);
+
         },
         error: function() {
             alert('Error while request...');

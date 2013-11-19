@@ -5,6 +5,9 @@
     <page:list id="pl_ru_sberbank_jms_util_domain_JmsConfiguration" items="${jmsconfigurations}" z="z+lfL44xe7omZnsQ4VWDevs3gCk=">
         <table:table data="${jmsconfigurations}" id="l_ru_sberbank_jms_util_domain_JmsConfiguration" path="/jmsconfigurations" z="Tj0c7OfHpZCQiG7DY/sGnPI57Sk=">
             <table:column id="c_ru_sberbank_jms_util_domain_JmsConfiguration_url" property="url" z="WUssIryiAiO4YNrCEZRr9x80wBI="/>
+            <table:column id="c_ru_sberbank_jms_util_domain_JmsConfiguration_configurationName" property="configurationName" z="hBL2hmSObO4t/JcGkI2pCi60Hgo="/>
+            <table:column id="c_ru_sberbank_jms_util_domain_JmsConfiguration_queueName" property="queueName" z="5X408JE8hPFKOF6G7DVeDdVsPrU="/>
+            <table:column id="c_ru_sberbank_jms_util_domain_JmsConfiguration_delay" property="delay" z="QJxV477ogREN0TqOFZvJMIX47N0="/>
         </table:table>
     </page:list>
 </div>

@@ -8,3 +8,11 @@ jpa setup --provider HIBERNATE --database HYPERSONIC_IN_MEMORY
 entity jpa --class ~.domain.JmsConfiguration --testAutomatically 
 field string --fieldName url --notNull --sizeMin 3
 web mvc all --package ~.web
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-19 10:48:11
+download status
+download accept terms of use
+hint
+hint fields
+field string --class ~.domain.JmsConfiguration --fieldName configurationName --notNull
+field string --class ~.domain.JmsConfiguration --fieldName queueName --sizeMin 3
+field number --type int --fieldName delay --notNull --min 5 --max 999999

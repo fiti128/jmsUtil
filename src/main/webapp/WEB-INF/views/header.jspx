@@ -8,9 +8,8 @@
   <spring:message var="app_name" code="application_name" htmlEscape="false" />
   <spring:message code="welcome_titlepane" arguments="${app_name}" var="welcome_label" htmlEscape="false" />
   <h3>
-
-    <a href="${home}" name="${fn:escapeXml(welcome_label)}" title="${fn:escapeXml(welcome_label)}">
-      ${fn:escapeXml(welcome_label)}
+      <a href="${home}" name="${fn:escapeXml(app_name)}" title="${fn:escapeXml(app_name)}">
+      ${fn:escapeXml(app_name)}
   </a>
   </h3>
 </div>

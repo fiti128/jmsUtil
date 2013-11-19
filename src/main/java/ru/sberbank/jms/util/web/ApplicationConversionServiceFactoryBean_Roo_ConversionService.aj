@@ -16,7 +16,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<JmsConfiguration, String> ApplicationConversionServiceFactoryBean.getJmsConfigurationToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<ru.sberbank.jms.util.domain.JmsConfiguration, java.lang.String>() {
             public String convert(JmsConfiguration jmsConfiguration) {
-                return new StringBuilder().append(jmsConfiguration.getUrl()).toString();
+                return new StringBuilder().append(jmsConfiguration.getUrl()).append(' ').append(jmsConfiguration.getConfigurationName()).append(' ').append(jmsConfiguration.getQueueName()).append(' ').append(jmsConfiguration.getDelay()).toString();
             }
         };
     }

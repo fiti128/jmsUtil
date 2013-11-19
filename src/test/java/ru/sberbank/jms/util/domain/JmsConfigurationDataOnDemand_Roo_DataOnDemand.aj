@@ -24,8 +24,29 @@ privileged aspect JmsConfigurationDataOnDemand_Roo_DataOnDemand {
     
     public JmsConfiguration JmsConfigurationDataOnDemand.getNewTransientJmsConfiguration(int index) {
         JmsConfiguration obj = new JmsConfiguration();
+        setConfigurationName(obj, index);
+        setDelay(obj, index);
+        setQueueName(obj, index);
         setUrl(obj, index);
         return obj;
+    }
+    
+    public void JmsConfigurationDataOnDemand.setConfigurationName(JmsConfiguration obj, int index) {
+        String configurationName = "configurationName_" + index;
+        obj.setConfigurationName(configurationName);
+    }
+    
+    public void JmsConfigurationDataOnDemand.setDelay(JmsConfiguration obj, int index) {
+        int delay = index;
+        if (delay < 5 || delay > 999999) {
+            delay = 999999;
+        }
+        obj.setDelay(delay);
+    }
+    
+    public void JmsConfigurationDataOnDemand.setQueueName(JmsConfiguration obj, int index) {
+        String queueName = "queueName_" + index;
+        obj.setQueueName(queueName);
     }
     
     public void JmsConfigurationDataOnDemand.setUrl(JmsConfiguration obj, int index) {

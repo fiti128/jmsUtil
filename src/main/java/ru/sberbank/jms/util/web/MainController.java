@@ -47,12 +47,8 @@ public class MainController {
         List<String> configurationList = new ArrayList<String>();
         
         for (JmsConfiguration config : list) {
-            configurationList.add(config.getUrl());
+            configurationList.add(config.getConfigurationName());
         }
-        for (String s : configurationList) {
-            System.out.println(s);
-        }
-        System.out.println(home);
         JmsConfiguration jmsConfiguration = new JmsConfiguration();
         uiModel.addAttribute("jmsConfig",jmsConfiguration);
         uiModel.addAttribute("configurationList",configurationList);
@@ -62,12 +58,14 @@ public class MainController {
     @RequestMapping(value = "/getConfigurationList", method = RequestMethod.POST)
     public @ResponseBody
     JmsConfiguration getJmsConfigurationList(@RequestParam(required = false) String name) {
-        String result = "good Url";
-        if(name!=null) {
-            result = name;
-        }
+
         JmsConfiguration jmsConfiguration = new JmsConfiguration();
-        jmsConfiguration.setUrl(result);
-         return jmsConfiguration;
+        List<JmsConfiguration> jmsConfigurationList = JmsConfiguration.findAllJmsConfigurations();
+        for (JmsConfiguration config : jmsConfigurationList) {
+              if (config.getConfigurationName().equals(name)) {
+                  jmsConfiguration = config;
+              }
+        }
+        return jmsConfiguration;
     }
 }

@@ -15,4 +15,28 @@ privileged aspect JmsConfiguration_Roo_JavaBean {
         this.url = url;
     }
     
+    public String JmsConfiguration.getConfigurationName() {
+        return this.configurationName;
+    }
+    
+    public void JmsConfiguration.setConfigurationName(String configurationName) {
+        this.configurationName = configurationName;
+    }
+    
+    public String JmsConfiguration.getQueueName() {
+        return this.queueName;
+    }
+    
+    public void JmsConfiguration.setQueueName(String queueName) {
+        this.queueName = queueName;
+    }
+    
+    public int JmsConfiguration.getDelay() {
+        return this.delay;
+    }
+    
+    public void JmsConfiguration.setDelay(int delay) {
+        this.delay = delay;
+    }
+    
 }

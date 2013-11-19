@@ -4,5 +4,8 @@
     <jsp:output omit-xml-declaration="yes"/>
     <form:update id="fu_ru_sberbank_jms_util_domain_JmsConfiguration" modelAttribute="jmsConfiguration" path="/jmsconfigurations" versionField="Version" z="tV44brPNhJyOYvwlMmBzHQEjH9U=">
         <field:input field="url" id="c_ru_sberbank_jms_util_domain_JmsConfiguration_url" min="3" required="true" z="CgSO1+tT6hXd58cYmHAbCqrm6FY="/>
+        <field:input field="configurationName" id="c_ru_sberbank_jms_util_domain_JmsConfiguration_configurationName" required="true" z="oS8AkerhBZjHN0boulmmZWKcVOA="/>
+        <field:input field="queueName" id="c_ru_sberbank_jms_util_domain_JmsConfiguration_queueName" min="3" required="true" z="65IEzqB5CKo40KixS7Z0qitTmm8="/>
+        <field:input field="delay" id="c_ru_sberbank_jms_util_domain_JmsConfiguration_delay" max="999999" min="5" required="true" z="0Ij7KhQv27WuInVfRT3ZrJrKFNw="/>
     </form:update>
 </div>
