@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.activemq.spring.ActiveMQConnectionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import ru.sberbank.jms.util.domain.JmsConfiguration;
 import ru.sberbank.jms.util.domain.MqConfig;
 import ru.sberbank.jms.util.domain.XmlMessage;
+import ru.sberbank.jms.util.jmx.UpdateConfigurationService;
 
 import javax.annotation.Resource;
 import javax.management.*;
@@ -35,6 +37,11 @@ public class MainController {
     @Autowired
     private transient JmsTemplate jmsTopicTemplate;
 
+    @Resource(name = "jmsFactory")
+    ActiveMQConnectionFactory activeMQConnectionFactory;
+
+    @Resource(name = "updateConfigurationService")
+    UpdateConfigurationService updateConfigurationService;
 //    @Autowired
     @Resource(name = "mBeanServerClient")
     MBeanServerConnection mBeanServerConnection;
@@ -66,6 +73,7 @@ public class MainController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        System.out.println(activeMQConnectionFactory.getBrokerURL());
         jmsTopicTemplate.convertAndSend("Hi jms");
         JmsConfiguration jmsConfiguration = new JmsConfiguration();
         uiModel.addAttribute("jmsConfig",jmsConfiguration);
@@ -79,6 +87,7 @@ public class MainController {
 
         JmsConfiguration jmsConfiguration = JmsConfiguration.findJmsConfiguration(name);
         System.out.println(jmsConfiguration.getConfigurationName());
+        updateConfigurationService.updateConfiguration(jmsConfiguration);
 //        List<JmsConfiguration> jmsConfigurationList = JmsConfiguration.findAllOptions();
 //        for (JmsConfiguration config : jmsConfigurationList) {
 //              if (config.getConfigurationName().equals(name)) {

@@ -45,4 +45,6 @@
         <property name="recoveryInterval" value="8000"/>
         <property name="pubSubDomain" value="true"/>
     </bean>
+
+
 </beans>

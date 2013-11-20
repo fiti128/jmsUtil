@@ -78,8 +78,13 @@
             <map>
                 <entry key="legres:name=DataSource"
                        value-ref="dataSource"/>
-                <!--<entry key="legres:name=Container"-->
-                       <!--value-ref="messageReceiveService"/>-->
+                <entry key="legres:name=Factory"
+                       value-ref="jmsFactory"/>
+                <entry key="legres:name=sendTopic"
+                       value-ref="sendTopic"/>
+                <entry key="legres:name=receiveTopic"
+                       value-ref="receiveTopic"/>
+
             </map>
         </property>
         <property name="server" ref="mbeanServer"/>
@@ -97,4 +102,7 @@
         <property name="serviceUrl" value="service:jmx:rmi://localhost/jndi/rmi://localhost:1099/jmsUtil"/>
     </bean>
 
+    <bean id="updateConfigurationService" class="ru.sberbank.jms.util.jmx.UpdateConfigurationServiceImpl">
+        <property name="mBeanServerConnection" ref="mBeanServerClient"/>
+    </bean>
 </beans>
