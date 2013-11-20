@@ -78,6 +78,7 @@ public class MainController {
     JmsConfiguration getJmsConfigurationList(@RequestParam(required = false) String name) {
 
         JmsConfiguration jmsConfiguration = JmsConfiguration.findJmsConfiguration(name);
+        System.out.println(jmsConfiguration.getConfigurationName());
 //        List<JmsConfiguration> jmsConfigurationList = JmsConfiguration.findAllOptions();
 //        for (JmsConfiguration config : jmsConfigurationList) {
 //              if (config.getConfigurationName().equals(name)) {

@@ -13,11 +13,12 @@ function madeAjaxCall(thisId,url) {
         data: ({name : confValue}),
         url: url,
         success: function(response) {
+            console.info(response.configurationName);
             $('#configurationNameId').text(response.configurationName);
             $('#urlId').text(response.url);
             $('#delayId').text(response.delay);
             $('#queueId').text(response.queueName);
-            $('#configurationId').text(response.id);
+            $('#queueReceiveId').text(response.queueNameReceive);
 
         },
         error: function() {
