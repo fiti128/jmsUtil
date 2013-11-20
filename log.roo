@@ -23,3 +23,10 @@ jms setup --provider ACTIVEMQ_IN_MEMORY --destinationType TOPIC --destinationNam
 jms listener class --class ~.messaging.JmsUtilTopicListener --destinationType TOPIC --destinationName jms.topic.JmsUtil
 quit
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-11-19 18:58:39
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-20 14:05:03
+field string --fieldName queueNameReceive --class ~.domain.JmsConfiguration --sizeMin 3
+field string --fieldName queueNameReceive --class ~.domain.JmsConfiguration --sizeMin 3
+quit
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-11-20 14:48:56
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-20 14:49:14
+field string --class ~.domain.JmsConfiguration --fieldName queueNameReceive --sizeMin 3

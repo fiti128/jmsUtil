@@ -5,9 +5,6 @@ package ru.sberbank.jms.util.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Version;
 import ru.sberbank.jms.util.domain.JmsConfiguration;
 
@@ -15,22 +12,9 @@ privileged aspect JmsConfiguration_Roo_Jpa_Entity {
     
     declare @type: JmsConfiguration: @Entity;
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Long JmsConfiguration.id;
-    
     @Version
     @Column(name = "version")
     private Integer JmsConfiguration.version;
-    
-    public Long JmsConfiguration.getId() {
-        return this.id;
-    }
-    
-    public void JmsConfiguration.setId(Long id) {
-        this.id = id;
-    }
     
     public Integer JmsConfiguration.getVersion() {
         return this.version;

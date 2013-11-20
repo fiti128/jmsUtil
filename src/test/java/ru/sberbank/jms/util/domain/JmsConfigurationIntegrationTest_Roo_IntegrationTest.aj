@@ -30,9 +30,9 @@ privileged aspect JmsConfigurationIntegrationTest_Roo_IntegrationTest {
     JmsConfigurationDataOnDemand JmsConfigurationIntegrationTest.dod;
     
     @Test
-    public void JmsConfigurationIntegrationTest.testCountJmsConfigurations() {
+    public void JmsConfigurationIntegrationTest.testCountOptions() {
         Assert.assertNotNull("Data on demand for 'JmsConfiguration' failed to initialize correctly", dod.getRandomJmsConfiguration());
-        long count = JmsConfiguration.countJmsConfigurations();
+        long count = JmsConfiguration.countOptions();
         Assert.assertTrue("Counter for 'JmsConfiguration' incorrectly reported there were no entries", count > 0);
     }
     
@@ -40,19 +40,19 @@ privileged aspect JmsConfigurationIntegrationTest_Roo_IntegrationTest {
     public void JmsConfigurationIntegrationTest.testFindJmsConfiguration() {
         JmsConfiguration obj = dod.getRandomJmsConfiguration();
         Assert.assertNotNull("Data on demand for 'JmsConfiguration' failed to initialize correctly", obj);
-        Long id = obj.getId();
+        String id = obj.getConfigurationName();
         Assert.assertNotNull("Data on demand for 'JmsConfiguration' failed to provide an identifier", id);
         obj = JmsConfiguration.findJmsConfiguration(id);
         Assert.assertNotNull("Find method for 'JmsConfiguration' illegally returned null for id '" + id + "'", obj);
-        Assert.assertEquals("Find method for 'JmsConfiguration' returned the incorrect identifier", id, obj.getId());
+        Assert.assertEquals("Find method for 'JmsConfiguration' returned the incorrect identifier", id, obj.getConfigurationName());
     }
     
     @Test
-    public void JmsConfigurationIntegrationTest.testFindAllJmsConfigurations() {
+    public void JmsConfigurationIntegrationTest.testFindAllOptions() {
         Assert.assertNotNull("Data on demand for 'JmsConfiguration' failed to initialize correctly", dod.getRandomJmsConfiguration());
-        long count = JmsConfiguration.countJmsConfigurations();
+        long count = JmsConfiguration.countOptions();
         Assert.assertTrue("Too expensive to perform a find all test for 'JmsConfiguration', as there are " + count + " entries; set the findAllMaximum to exceed this value or set findAll=false on the integration test annotation to disable the test", count < 250);
-        List<JmsConfiguration> result = JmsConfiguration.findAllJmsConfigurations();
+        List<JmsConfiguration> result = JmsConfiguration.findAllOptions();
         Assert.assertNotNull("Find all method for 'JmsConfiguration' illegally returned null", result);
         Assert.assertTrue("Find all method for 'JmsConfiguration' failed to return any data", result.size() > 0);
     }
@@ -60,7 +60,7 @@ privileged aspect JmsConfigurationIntegrationTest_Roo_IntegrationTest {
     @Test
     public void JmsConfigurationIntegrationTest.testFindJmsConfigurationEntries() {
         Assert.assertNotNull("Data on demand for 'JmsConfiguration' failed to initialize correctly", dod.getRandomJmsConfiguration());
-        long count = JmsConfiguration.countJmsConfigurations();
+        long count = JmsConfiguration.countOptions();
         if (count > 20) count = 20;
         int firstResult = 0;
         int maxResults = (int) count;
@@ -73,7 +73,7 @@ privileged aspect JmsConfigurationIntegrationTest_Roo_IntegrationTest {
     public void JmsConfigurationIntegrationTest.testFlush() {
         JmsConfiguration obj = dod.getRandomJmsConfiguration();
         Assert.assertNotNull("Data on demand for 'JmsConfiguration' failed to initialize correctly", obj);
-        Long id = obj.getId();
+        String id = obj.getConfigurationName();
         Assert.assertNotNull("Data on demand for 'JmsConfiguration' failed to provide an identifier", id);
         obj = JmsConfiguration.findJmsConfiguration(id);
         Assert.assertNotNull("Find method for 'JmsConfiguration' illegally returned null for id '" + id + "'", obj);
@@ -87,14 +87,14 @@ privileged aspect JmsConfigurationIntegrationTest_Roo_IntegrationTest {
     public void JmsConfigurationIntegrationTest.testMergeUpdate() {
         JmsConfiguration obj = dod.getRandomJmsConfiguration();
         Assert.assertNotNull("Data on demand for 'JmsConfiguration' failed to initialize correctly", obj);
-        Long id = obj.getId();
+        String id = obj.getConfigurationName();
         Assert.assertNotNull("Data on demand for 'JmsConfiguration' failed to provide an identifier", id);
         obj = JmsConfiguration.findJmsConfiguration(id);
         boolean modified =  dod.modifyJmsConfiguration(obj);
         Integer currentVersion = obj.getVersion();
         JmsConfiguration merged = obj.merge();
         obj.flush();
-        Assert.assertEquals("Identifier of merged object not the same as identifier of original object", merged.getId(), id);
+        Assert.assertEquals("Identifier of merged object not the same as identifier of original object", merged.getConfigurationName(), id);
         Assert.assertTrue("Version for 'JmsConfiguration' failed to increment on merge and flush directive", (currentVersion != null && obj.getVersion() > currentVersion) || !modified);
     }
     
@@ -103,7 +103,7 @@ privileged aspect JmsConfigurationIntegrationTest_Roo_IntegrationTest {
         Assert.assertNotNull("Data on demand for 'JmsConfiguration' failed to initialize correctly", dod.getRandomJmsConfiguration());
         JmsConfiguration obj = dod.getNewTransientJmsConfiguration(Integer.MAX_VALUE);
         Assert.assertNotNull("Data on demand for 'JmsConfiguration' failed to provide a new transient entity", obj);
-        Assert.assertNull("Expected 'JmsConfiguration' identifier to be null", obj.getId());
+        Assert.assertNull("Expected 'JmsConfiguration' identifier to be null", obj.getConfigurationName());
         try {
             obj.persist();
         } catch (final ConstraintViolationException e) {
@@ -115,14 +115,14 @@ privileged aspect JmsConfigurationIntegrationTest_Roo_IntegrationTest {
             throw new IllegalStateException(msg.toString(), e);
         }
         obj.flush();
-        Assert.assertNotNull("Expected 'JmsConfiguration' identifier to no longer be null", obj.getId());
+        Assert.assertNotNull("Expected 'JmsConfiguration' identifier to no longer be null", obj.getConfigurationName());
     }
     
     @Test
     public void JmsConfigurationIntegrationTest.testRemove() {
         JmsConfiguration obj = dod.getRandomJmsConfiguration();
         Assert.assertNotNull("Data on demand for 'JmsConfiguration' failed to initialize correctly", obj);
-        Long id = obj.getId();
+        String id = obj.getConfigurationName();
         Assert.assertNotNull("Data on demand for 'JmsConfiguration' failed to provide an identifier", id);
         obj = JmsConfiguration.findJmsConfiguration(id);
         obj.remove();

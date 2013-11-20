@@ -20,17 +20,17 @@ privileged aspect JmsConfiguration_Roo_Jpa_ActiveRecord {
         return em;
     }
     
-    public static long JmsConfiguration.countJmsConfigurations() {
+    public static long JmsConfiguration.countOptions() {
         return entityManager().createQuery("SELECT COUNT(o) FROM JmsConfiguration o", Long.class).getSingleResult();
     }
     
-    public static List<JmsConfiguration> JmsConfiguration.findAllJmsConfigurations() {
+    public static List<JmsConfiguration> JmsConfiguration.findAllOptions() {
         return entityManager().createQuery("SELECT o FROM JmsConfiguration o", JmsConfiguration.class).getResultList();
     }
     
-    public static JmsConfiguration JmsConfiguration.findJmsConfiguration(Long id) {
-        if (id == null) return null;
-        return entityManager().find(JmsConfiguration.class, id);
+    public static JmsConfiguration JmsConfiguration.findJmsConfiguration(String configurationName) {
+        if (configurationName == null || configurationName.length() == 0) return null;
+        return entityManager().find(JmsConfiguration.class, configurationName);
     }
     
     public static List<JmsConfiguration> JmsConfiguration.findJmsConfigurationEntries(int firstResult, int maxResults) {
@@ -49,7 +49,7 @@ privileged aspect JmsConfiguration_Roo_Jpa_ActiveRecord {
         if (this.entityManager.contains(this)) {
             this.entityManager.remove(this);
         } else {
-            JmsConfiguration attached = JmsConfiguration.findJmsConfiguration(this.id);
+            JmsConfiguration attached = JmsConfiguration.findJmsConfiguration(this.configurationName);
             this.entityManager.remove(attached);
         }
     }

@@ -51,6 +51,7 @@
                                 <p id="delayId" class="form-control-static"> </p>
                             </div>
                         </div>
+                        <p id="configurationId"  hidden="true"> </p>
              </div>
     </div>
 

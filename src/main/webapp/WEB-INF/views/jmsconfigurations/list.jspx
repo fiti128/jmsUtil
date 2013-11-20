@@ -2,12 +2,12 @@
 <div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <page:list id="pl_ru_sberbank_jms_util_domain_JmsConfiguration" items="${jmsconfigurations}" z="z+lfL44xe7omZnsQ4VWDevs3gCk=">
-        <table:table data="${jmsconfigurations}" id="l_ru_sberbank_jms_util_domain_JmsConfiguration" path="/jmsconfigurations" z="Tj0c7OfHpZCQiG7DY/sGnPI57Sk=">
+    <page:list id="pl_ru_sberbank_jms_util_domain_JmsConfiguration" items="${options}" z="PPL1N9RRQek4ZbkBF5zs8fJzBZw=">
+        <table:table data="${options}" id="l_ru_sberbank_jms_util_domain_JmsConfiguration" path="/jmsconfigurations" typeIdFieldName="configurationName" z="ghWyZtKIBIc/f4O1gpaj55lUMRQ=">
             <table:column id="c_ru_sberbank_jms_util_domain_JmsConfiguration_url" property="url" z="WUssIryiAiO4YNrCEZRr9x80wBI="/>
-            <table:column id="c_ru_sberbank_jms_util_domain_JmsConfiguration_configurationName" property="configurationName" z="hBL2hmSObO4t/JcGkI2pCi60Hgo="/>
             <table:column id="c_ru_sberbank_jms_util_domain_JmsConfiguration_queueName" property="queueName" z="5X408JE8hPFKOF6G7DVeDdVsPrU="/>
             <table:column id="c_ru_sberbank_jms_util_domain_JmsConfiguration_delay" property="delay" z="QJxV477ogREN0TqOFZvJMIX47N0="/>
+            <table:column id="c_ru_sberbank_jms_util_domain_JmsConfiguration_queueNameReceive" property="queueNameReceive" z="fGj32vzwLNOG+g6S8hb6Q4sZcl8="/>
         </table:table>
     </page:list>
 </div>

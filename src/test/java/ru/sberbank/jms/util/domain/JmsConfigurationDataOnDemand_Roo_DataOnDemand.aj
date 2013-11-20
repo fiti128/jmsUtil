@@ -24,16 +24,11 @@ privileged aspect JmsConfigurationDataOnDemand_Roo_DataOnDemand {
     
     public JmsConfiguration JmsConfigurationDataOnDemand.getNewTransientJmsConfiguration(int index) {
         JmsConfiguration obj = new JmsConfiguration();
-        setConfigurationName(obj, index);
         setDelay(obj, index);
         setQueueName(obj, index);
+        setQueueNameReceive(obj, index);
         setUrl(obj, index);
         return obj;
-    }
-    
-    public void JmsConfigurationDataOnDemand.setConfigurationName(JmsConfiguration obj, int index) {
-        String configurationName = "configurationName_" + index;
-        obj.setConfigurationName(configurationName);
     }
     
     public void JmsConfigurationDataOnDemand.setDelay(JmsConfiguration obj, int index) {
@@ -47,6 +42,11 @@ privileged aspect JmsConfigurationDataOnDemand_Roo_DataOnDemand {
     public void JmsConfigurationDataOnDemand.setQueueName(JmsConfiguration obj, int index) {
         String queueName = "queueName_" + index;
         obj.setQueueName(queueName);
+    }
+    
+    public void JmsConfigurationDataOnDemand.setQueueNameReceive(JmsConfiguration obj, int index) {
+        String queueNameReceive = "queueNameReceive_" + index;
+        obj.setQueueNameReceive(queueNameReceive);
     }
     
     public void JmsConfigurationDataOnDemand.setUrl(JmsConfiguration obj, int index) {
@@ -63,14 +63,14 @@ privileged aspect JmsConfigurationDataOnDemand_Roo_DataOnDemand {
             index = data.size() - 1;
         }
         JmsConfiguration obj = data.get(index);
-        Long id = obj.getId();
+        String id = obj.getConfigurationName();
         return JmsConfiguration.findJmsConfiguration(id);
     }
     
     public JmsConfiguration JmsConfigurationDataOnDemand.getRandomJmsConfiguration() {
         init();
         JmsConfiguration obj = data.get(rnd.nextInt(data.size()));
-        Long id = obj.getId();
+        String id = obj.getConfigurationName();
         return JmsConfiguration.findJmsConfiguration(id);
     }
     

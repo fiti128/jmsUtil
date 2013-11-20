@@ -77,13 +77,13 @@ public class MainController {
     public @ResponseBody
     JmsConfiguration getJmsConfigurationList(@RequestParam(required = false) String name) {
 
-        JmsConfiguration jmsConfiguration = new JmsConfiguration();
-        List<JmsConfiguration> jmsConfigurationList = JmsConfiguration.findAllJmsConfigurations();
-        for (JmsConfiguration config : jmsConfigurationList) {
-              if (config.getConfigurationName().equals(name)) {
-                  jmsConfiguration = config;
-              }
-        }
+        JmsConfiguration jmsConfiguration = JmsConfiguration.findJmsConfiguration(name);
+//        List<JmsConfiguration> jmsConfigurationList = JmsConfiguration.findAllOptions();
+//        for (JmsConfiguration config : jmsConfigurationList) {
+//              if (config.getConfigurationName().equals(name)) {
+//                  jmsConfiguration = config;
+//              }
+//        }
 
 
         return jmsConfiguration;

@@ -67,7 +67,7 @@ public class UploadController {
     XmlMessage sendMessage(MultipartHttpServletRequest request)  {
 
         JmsConfiguration jmsConfiguration = new JmsConfiguration();
-        List<JmsConfiguration> jmsConfigurationList = JmsConfiguration.findAllJmsConfigurations();
+        List<JmsConfiguration> jmsConfigurationList = JmsConfiguration.findAllOptions();
         for (JmsConfiguration config : jmsConfigurationList) {
             if (config.getConfigurationName().equals("name")) {
                 jmsConfiguration = config;

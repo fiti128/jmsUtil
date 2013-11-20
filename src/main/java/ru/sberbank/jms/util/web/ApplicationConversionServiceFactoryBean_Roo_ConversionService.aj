@@ -16,23 +16,15 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<JmsConfiguration, String> ApplicationConversionServiceFactoryBean.getJmsConfigurationToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<ru.sberbank.jms.util.domain.JmsConfiguration, java.lang.String>() {
             public String convert(JmsConfiguration jmsConfiguration) {
-                return new StringBuilder().append(jmsConfiguration.getUrl()).append(' ').append(jmsConfiguration.getConfigurationName()).append(' ').append(jmsConfiguration.getQueueName()).append(' ').append(jmsConfiguration.getDelay()).toString();
+                return new StringBuilder().append(jmsConfiguration.getUrl()).append(' ').append(jmsConfiguration.getQueueName()).append(' ').append(jmsConfiguration.getDelay()).append(' ').append(jmsConfiguration.getQueueNameReceive()).toString();
             }
         };
     }
     
-    public Converter<Long, JmsConfiguration> ApplicationConversionServiceFactoryBean.getIdToJmsConfigurationConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.lang.Long, ru.sberbank.jms.util.domain.JmsConfiguration>() {
-            public ru.sberbank.jms.util.domain.JmsConfiguration convert(java.lang.Long id) {
-                return JmsConfiguration.findJmsConfiguration(id);
-            }
-        };
-    }
-    
-    public Converter<String, JmsConfiguration> ApplicationConversionServiceFactoryBean.getStringToJmsConfigurationConverter() {
+    public Converter<String, JmsConfiguration> ApplicationConversionServiceFactoryBean.getIdToJmsConfigurationConverter() {
         return new org.springframework.core.convert.converter.Converter<java.lang.String, ru.sberbank.jms.util.domain.JmsConfiguration>() {
-            public ru.sberbank.jms.util.domain.JmsConfiguration convert(String id) {
-                return getObject().convert(getObject().convert(id, Long.class), JmsConfiguration.class);
+            public ru.sberbank.jms.util.domain.JmsConfiguration convert(java.lang.String id) {
+                return JmsConfiguration.findJmsConfiguration(id);
             }
         };
     }
@@ -40,7 +32,6 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public void ApplicationConversionServiceFactoryBean.installLabelConverters(FormatterRegistry registry) {
         registry.addConverter(getJmsConfigurationToStringConverter());
         registry.addConverter(getIdToJmsConfigurationConverter());
-        registry.addConverter(getStringToJmsConfigurationConverter());
     }
     
     public void ApplicationConversionServiceFactoryBean.afterPropertiesSet() {

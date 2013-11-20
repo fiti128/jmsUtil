@@ -27,7 +27,7 @@ privileged aspect JmsConfigurationController_Roo_Controller {
         }
         uiModel.asMap().clear();
         jmsConfiguration.persist();
-        return "redirect:/jmsconfigurations/" + encodeUrlPathSegment(jmsConfiguration.getId().toString(), httpServletRequest);
+        return "redirect:/jmsconfigurations/" + encodeUrlPathSegment(jmsConfiguration.getConfigurationName().toString(), httpServletRequest);
     }
     
     @RequestMapping(params = "form", produces = "text/html")
@@ -36,10 +36,10 @@ privileged aspect JmsConfigurationController_Roo_Controller {
         return "jmsconfigurations/create";
     }
     
-    @RequestMapping(value = "/{id}", produces = "text/html")
-    public String JmsConfigurationController.show(@PathVariable("id") Long id, Model uiModel) {
-        uiModel.addAttribute("jmsconfiguration", JmsConfiguration.findJmsConfiguration(id));
-        uiModel.addAttribute("itemId", id);
+    @RequestMapping(value = "/{configurationName}", produces = "text/html")
+    public String JmsConfigurationController.show(@PathVariable("configurationName") String configurationName, Model uiModel) {
+        uiModel.addAttribute("jmsconfiguration", JmsConfiguration.findJmsConfiguration(configurationName));
+        uiModel.addAttribute("itemId", configurationName);
         return "jmsconfigurations/show";
     }
     
@@ -48,11 +48,11 @@ privileged aspect JmsConfigurationController_Roo_Controller {
         if (page != null || size != null) {
             int sizeNo = size == null ? 10 : size.intValue();
             final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
-            uiModel.addAttribute("jmsconfigurations", JmsConfiguration.findJmsConfigurationEntries(firstResult, sizeNo));
-            float nrOfPages = (float) JmsConfiguration.countJmsConfigurations() / sizeNo;
+            uiModel.addAttribute("options", JmsConfiguration.findJmsConfigurationEntries(firstResult, sizeNo));
+            float nrOfPages = (float) JmsConfiguration.countOptions() / sizeNo;
             uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
         } else {
-            uiModel.addAttribute("jmsconfigurations", JmsConfiguration.findAllJmsConfigurations());
+            uiModel.addAttribute("options", JmsConfiguration.findAllOptions());
         }
         return "jmsconfigurations/list";
     }
@@ -65,18 +65,18 @@ privileged aspect JmsConfigurationController_Roo_Controller {
         }
         uiModel.asMap().clear();
         jmsConfiguration.merge();
-        return "redirect:/jmsconfigurations/" + encodeUrlPathSegment(jmsConfiguration.getId().toString(), httpServletRequest);
+        return "redirect:/jmsconfigurations/" + encodeUrlPathSegment(jmsConfiguration.getConfigurationName().toString(), httpServletRequest);
     }
     
-    @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
-    public String JmsConfigurationController.updateForm(@PathVariable("id") Long id, Model uiModel) {
-        populateEditForm(uiModel, JmsConfiguration.findJmsConfiguration(id));
+    @RequestMapping(value = "/{configurationName}", params = "form", produces = "text/html")
+    public String JmsConfigurationController.updateForm(@PathVariable("configurationName") String configurationName, Model uiModel) {
+        populateEditForm(uiModel, JmsConfiguration.findJmsConfiguration(configurationName));
         return "jmsconfigurations/update";
     }
     
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
-    public String JmsConfigurationController.delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        JmsConfiguration jmsConfiguration = JmsConfiguration.findJmsConfiguration(id);
+    @RequestMapping(value = "/{configurationName}", method = RequestMethod.DELETE, produces = "text/html")
+    public String JmsConfigurationController.delete(@PathVariable("configurationName") String configurationName, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
+        JmsConfiguration jmsConfiguration = JmsConfiguration.findJmsConfiguration(configurationName);
         jmsConfiguration.remove();
         uiModel.asMap().clear();
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());

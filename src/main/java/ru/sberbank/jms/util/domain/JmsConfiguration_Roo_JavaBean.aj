@@ -39,4 +39,12 @@ privileged aspect JmsConfiguration_Roo_JavaBean {
         this.delay = delay;
     }
     
+    public String JmsConfiguration.getQueueNameReceive() {
+        return this.queueNameReceive;
+    }
+    
+    public void JmsConfiguration.setQueueNameReceive(String queueNameReceive) {
+        this.queueNameReceive = queueNameReceive;
+    }
+    
 }

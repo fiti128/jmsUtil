@@ -17,6 +17,7 @@ function madeAjaxCall(thisId,url) {
             $('#urlId').text(response.url);
             $('#delayId').text(response.delay);
             $('#queueId').text(response.queueName);
+            $('#configurationId').text(response.id);
 
         },
         error: function() {
