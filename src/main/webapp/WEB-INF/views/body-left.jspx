@@ -9,6 +9,6 @@
     <form>
         <input id="fileupload" type="file" name="files[]" data-url="upload"/>
         <br/>
-        <pre id="result" hidden="true"> </pre>
+        <pre id="result" hidden="true" col="100"  data-role="none"> </pre>
     </form>
 </div>

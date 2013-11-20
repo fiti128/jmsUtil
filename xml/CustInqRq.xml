@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<IFXRqType xmlns:ns2="http://sbrf.ru/baseproduct/erib/adapter/1">
+    <ns2:CustInqRq>
+        <ns2:RqUID>cb72040965f27836f842dc6a55302e2c</ns2:RqUID>
+        <ns2:RqTm>2013-06-04T18:11:55</ns2:RqTm>
+        <ns2:OperUID>AA679abd3b7d83dec4326140c64c0599</ns2:OperUID>
+        <ns2:SPName>BP_ERIB</ns2:SPName>
+        <ns2:BankInfo>
+            <ns2:RbTbBrchId>38000000</ns2:RbTbBrchId>
+        </ns2:BankInfo>
+        <ns2:CustInfo>
+            <ns2:PersonInfo>
+                <ns2:Birthday>1972-09-30</ns2:Birthday>
+                <ns2:PersonName>
+                    <ns2:LastName>Удобнов</ns2:LastName>
+                    <ns2:FirstName>Ериб</ns2:FirstName>
+                    <ns2:MiddleName>Автотестович</ns2:MiddleName>
+                </ns2:PersonName>
+                <ns2:IdentityCard>
+                    <ns2:IdType>21</ns2:IdType>
+                    <ns2:IdSeries>46 11</ns2:IdSeries>
+                    <ns2:IdNum>913711</ns2:IdNum>
+                    <ns2:IssuedBy>Отделом УФМС России по Ульяновской области в Засвияжском р-не г. Ульяновска ,730</ns2:IssuedBy>
+                    <ns2:IssueDt>2010-11-11</ns2:IssueDt>
+                    <ns2:ExpDt>2015-11-11</ns2:ExpDt>
+                </ns2:IdentityCard>
+            </ns2:PersonInfo>
+        </ns2:CustInfo>
+    </ns2:CustInqRq>
+</IFXRqType>

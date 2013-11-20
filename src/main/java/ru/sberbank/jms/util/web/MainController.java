@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jmx.support.MBeanServerConnectionFactoryBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import ru.sberbank.jms.util.domain.JmsConfiguration;
 import ru.sberbank.jms.util.domain.MqConfig;
+import ru.sberbank.jms.util.domain.XmlMessage;
 
 import javax.annotation.Resource;
 import javax.management.*;
@@ -29,8 +32,10 @@ import javax.management.*;
  */
 @Controller
 public class MainController {
-//	@Value("#{button_home}")
-    String home="home";
+    @Autowired
+    private transient JmsTemplate jmsTopicTemplate;
+
+//    @Autowired
     @Resource(name = "mBeanServerClient")
     MBeanServerConnection mBeanServerConnection;
 
@@ -50,9 +55,7 @@ public class MainController {
     @RequestMapping(value="/" ,method = RequestMethod.GET)
     public String showMainPage(Model uiModel)  {
         List<JmsConfiguration> list = JmsConfiguration.findJmsConfigurationEntries(0,10);
-        System.out.println(list.size());
         List<String> configurationList = new ArrayList<String>();
-        System.out.println(mBeanServerConnection);
         for (JmsConfiguration config : list) {
             configurationList.add(config.getConfigurationName());
         }
@@ -63,7 +66,7 @@ public class MainController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        jmsTopicTemplate.convertAndSend("Hi jms");
         JmsConfiguration jmsConfiguration = new JmsConfiguration();
         uiModel.addAttribute("jmsConfig",jmsConfiguration);
         uiModel.addAttribute("configurationList",configurationList);
@@ -81,6 +84,11 @@ public class MainController {
                   jmsConfiguration = config;
               }
         }
+
+
         return jmsConfiguration;
     }
+
+
+
 }

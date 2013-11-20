@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<IFXRqType xmlns:ns2="http://sbrf.ru/baseproduct/erib/adapter/1">
+    <ns2:DepoAccInfoRq>
+        <ns2:RqUID>599b93a576378c7cd4cd56a3a5666ec3</ns2:RqUID>
+        <ns2:RqTm>2013-06-04T18:12:12</ns2:RqTm>
+        <ns2:OperUID>AAfcec4d33ba276a18b666dc4129501e</ns2:OperUID>
+        <ns2:SPName>BP_ERIB</ns2:SPName>
+        <ns2:BankInfo>
+            <ns2:RbTbBrchId>38000000</ns2:RbTbBrchId>
+        </ns2:BankInfo>
+        <ns2:DepoAcctId>
+            <ns2:SystemId>DEPO</ns2:SystemId>
+            <ns2:AcctId>858800225555</ns2:AcctId>
+            <ns2:BankInfo>
+                <ns2:RbBrchId>389038</ns2:RbBrchId>
+            </ns2:BankInfo>
+        </ns2:DepoAcctId>
+    </ns2:DepoAccInfoRq>
+</IFXRqType>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<IFXRqType xmlns:ns2="http://sbrf.ru/baseproduct/erib/adapter/1">
+    <ns2:CardAcctDInqRq>
+        <ns2:RqUID>1112d34095b08e681ed3c88380b5fa19</ns2:RqUID>
+        <ns2:RqTm>2013-06-04T18:12:15</ns2:RqTm>
+        <ns2:OperUID>AA2c30fb0453c2172aef98c973a9cf38</ns2:OperUID>
+        <ns2:SPName>BP_ERIB</ns2:SPName>
+        <ns2:BankInfo>
+            <ns2:RbTbBrchId>38000000</ns2:RbTbBrchId>
+        </ns2:BankInfo>
+        <ns2:CardInfo>
+            <ns2:CardAcctId>
+                <ns2:SystemId>urn:sbrfsystems:38-cod</ns2:SystemId>
+                <ns2:CardNum>4294030010099905</ns2:CardNum>
+            </ns2:CardAcctId>
+        </ns2:CardInfo>
+    </ns2:CardAcctDInqRq>
+</IFXRqType>

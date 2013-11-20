@@ -16,3 +16,10 @@ hint fields
 field string --class ~.domain.JmsConfiguration --fieldName configurationName --notNull
 field string --class ~.domain.JmsConfiguration --fieldName queueName --sizeMin 3
 field number --type int --fieldName delay --notNull --min 5 --max 999999
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-19 17:37:33
+hint
+jms setup --provider ACTIVEMQ_IN_MEMORY --destinationType TOPIC --destinationName jms.topic.JmsUtil
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-19 17:46:33
+jms listener class --class ~.messaging.JmsUtilTopicListener --destinationType TOPIC --destinationName jms.topic.JmsUtil
+quit
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-11-19 18:58:39

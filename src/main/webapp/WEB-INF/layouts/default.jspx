@@ -24,11 +24,11 @@
                 <tiles:insertAttribute name="configuration" ignore="true" />
 
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-lg-6">
 
                         <tiles:insertAttribute name="body-left" ignore="true" />
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-lg-6">
 
 	    		        <tiles:insertAttribute name="body-right" ignore="true" />
                     </div>
