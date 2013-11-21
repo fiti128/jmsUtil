@@ -84,6 +84,14 @@
                        value-ref="sendTopic"/>
                 <entry key="legres:name=receiveTopic"
                        value-ref="receiveTopic"/>
+                <entry key="legres:name=template"
+                       value-ref="jmsTemplate"/>
+                <entry key="legres:name=container"
+                       value-ref="jmsContainer"/>
+                <entry key="legres:name=sendQueue"
+                       value-ref="sendQueue"/>
+                <entry key="legres:name=receiveQueue"
+                       value-ref="receiveQueue"/>
 
             </map>
         </property>

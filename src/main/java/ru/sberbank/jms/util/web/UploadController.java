@@ -11,6 +11,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import ru.sberbank.jms.util.domain.JmsConfiguration;
 import ru.sberbank.jms.util.domain.XmlMessage;
+import ru.sberbank.jms.util.jmx.ManagingReceiveMessagesService;
+import ru.sberbank.jms.util.xml.UpdateUidService;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
@@ -27,17 +29,26 @@ import java.util.List;
 @RequestMapping(value = "/upload")
 @Controller
 public class UploadController {
+    public static final String ERROR_UPLOAD_STRING_NOT_XML = "Для загрузки требуется xml файл!";
+    public static final String UPLOAD_EXTENSION_PATTERN = ".*xml";
+    public static final String DEFAULT_ENCODING = "Windows-1251";
     @Autowired
     private transient JmsTemplate jmsTopicTemplate;
+
+    @Autowired
+    UpdateUidService updateUidService;
+
+    @Autowired
+    private transient ManagingReceiveMessagesService managingReceiveMessagesService;
 
     private XmlMessage xmlMessage;
 
     @RequestMapping( method = RequestMethod.POST)
     public @ResponseBody
     JmsConfiguration upload(MultipartHttpServletRequest request) throws IOException {
-
+//        managingReceiveMessagesService.receiveAttempt();
         JmsConfiguration jmsConfiguration = new JmsConfiguration();
-        jmsConfiguration.setUrl("Для загрузки требуется xml файл!");
+        jmsConfiguration.setUrl(ERROR_UPLOAD_STRING_NOT_XML);
         //0. notice, we have used MultipartHttpServletRequest
 
         //1. get the files from the request object
@@ -47,14 +58,15 @@ public class UploadController {
         String fileName = mpf.getOriginalFilename();
 
 
-        if (fileName.matches(".*xml")) {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(mpf.getInputStream(),"Windows-1251"));
+        if (fileName.matches(UPLOAD_EXTENSION_PATTERN)) {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(mpf.getInputStream(), getEncoding()));
             StringBuilder sb = new StringBuilder();
-            String str =null;
+            String str;
             while((str =reader.readLine()) != null) {
                sb.append(str).append("\n\r");
             }
             str = sb.toString();
+            str = updateUidService.updateUid(str);
             xmlMessage = new XmlMessage();
             xmlMessage.setXmlText(str);
             jmsConfiguration.setUrl(str);
@@ -62,6 +74,11 @@ public class UploadController {
         return jmsConfiguration;
 
     }
+
+    private String getEncoding() {
+        return DEFAULT_ENCODING;
+    }
+
     @RequestMapping(value = "/sendMessage", method = RequestMethod.POST)
     public @ResponseBody
     XmlMessage sendMessage(MultipartHttpServletRequest request)  {

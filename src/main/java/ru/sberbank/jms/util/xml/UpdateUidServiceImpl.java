@@ -1,11 +1,21 @@
 package ru.sberbank.jms.util.xml;
 
 
+
+import org.apache.commons.codec.digest.DigestUtils;
 import org.jdom2.Document;
 import org.jdom2.Element;
+import org.jdom2.Namespace;
 import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
+import org.springframework.stereotype.Service;
+
+import java.io.ByteArrayInputStream;
+import java.nio.charset.Charset;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,28 +25,28 @@ import org.jdom2.output.XMLOutputter;
  * To change this template use File | Settings | File Templates.
  */
 
-
+@Service("updateUidService")
 public class UpdateUidServiceImpl implements UpdateUidService {
+
+    public static final String DATE_PATTERN = "yyyy-MM-dd'T'HH:mm:ss";
+    public static final String ENCODING = "UTF-8";
+    public static final String ERROR_STRING = "Произошла ошибка при обновлении UID. Вывод старой версии\n";
+
     public String updateUid(String xml) {
         try {
         SAXBuilder builder = new SAXBuilder();
 
-        Document doc = (Document) builder.build(xml);
+        Document doc = (Document) builder.build(new ByteArrayInputStream(xml.getBytes(Charset.forName(ENCODING))));
         Element rootNode = doc.getRootElement();
 
-        // update staff id attribute
-        Element staff = rootNode.getChild("ns2:DepoAccInfoRq").getChild("ns2:RqUID").setText("Yoho");
-        staff.getAttribute("id").setValue("2");
+        List<Element> elementList = rootNode.getChildren();
 
-        // add new age element
-        Element age = new Element("age").setText("28");
-        staff.addContent(age);
+        Element depoAccInfoRq = elementList.get(0);
+            List<Element> uidList = depoAccInfoRq.getChildren();
+            uidList.get(0).setText(getUniqueHash());
+            uidList.get(1).setText(new SimpleDateFormat(DATE_PATTERN).format(new Date()));
+            uidList.get(2).setText(getUniqueHash());
 
-        // update salary value
-        staff.getChild("salary").setText("7000");
-
-        // remove firstname element
-        staff.removeChild("firstname");
 
         XMLOutputter xmlOutput = new XMLOutputter();
 
@@ -44,9 +54,16 @@ public class UpdateUidServiceImpl implements UpdateUidService {
         xmlOutput.setFormat(Format.getPrettyFormat());
         xml = xmlOutput.outputString(doc);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            xml = ERROR_STRING + xml;
+            e.printStackTrace();
         }
         return xml;
           //To change body of implemented methods use File | Settings | File Templates.
     }
+
+    private String getUniqueHash() {
+        return DigestUtils.md5Hex(String.valueOf(System.nanoTime()));
+    }
+
+
 }
