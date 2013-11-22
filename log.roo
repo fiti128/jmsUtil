@@ -30,3 +30,8 @@ quit
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-11-20 14:48:56
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-20 14:49:14
 field string --class ~.domain.JmsConfiguration --fieldName queueNameReceive --sizeMin 3
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-21 16:40:31
+entity jpa --class ~.domain.JmsMessage --testAutomatically 
+field string --fieldName messageBody --notNull 
+quit
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-11-21 17:22:08

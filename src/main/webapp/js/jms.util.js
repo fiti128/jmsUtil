@@ -37,3 +37,41 @@ $(function () {
         }
 });
 });
+var interval = 5000;
+function receiveJmsMessage() {
+    var jmsConfigurationId = 1;
+    var delay =  $('delayId').text();
+    if (!isNaN(delay)) {
+        interval = delay;
+    }
+    $.ajax({
+        type: 'post',
+        url: 'receive',
+        data: ({receiveConfigurationId : jmsConfigurationId}),
+        success: function(response) {
+            var htmlElement = $('#receivedXml');
+            var xmlBody = '';
+            var counter = 0;
+            $.each(response, function (i,item) {
+                if (i > 0) {
+                    var count = i+1;
+                    xmlBody = xmlBody+ '----------------\nСообщение ' + count+ '\n';
+                }
+                 xmlBody = xmlBody + item.messageBody + '\n';
+                counter++;
+            });
+                if (response.length > 0) {
+                     htmlElement.attr('hidden',false);
+                }
+            htmlElement.text(xmlBody);
+
+        },
+        error: function() {
+            alert('Error while request...');
+        }
+    });
+
+}
+//$(document).ready(receiveJmsMessage());
+setInterval('receiveJmsMessage()',interval);
+

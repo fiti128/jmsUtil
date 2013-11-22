@@ -38,15 +38,13 @@ public class UploadController {
     @Autowired
     UpdateUidService updateUidService;
 
-    @Autowired
-    private transient ManagingReceiveMessagesService managingReceiveMessagesService;
 
     private XmlMessage xmlMessage;
 
     @RequestMapping( method = RequestMethod.POST)
     public @ResponseBody
     JmsConfiguration upload(MultipartHttpServletRequest request) throws IOException {
-//        managingReceiveMessagesService.receiveAttempt();
+
         JmsConfiguration jmsConfiguration = new JmsConfiguration();
         jmsConfiguration.setUrl(ERROR_UPLOAD_STRING_NOT_XML);
         //0. notice, we have used MultipartHttpServletRequest
