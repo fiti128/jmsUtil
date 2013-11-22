@@ -80,7 +80,7 @@ function sendMessage() {
         data: ({sendConfigurationId : jmsConfigurationId, xmlString : xml}),
         url: 'send',
         success: function(response) {
-            $('#sendResult').text(response).attr('hidden',false);
+            $('#sendResult').text(response.messageBody).attr('hidden',false);
                 },
         error: function() {
             alert('Error while request...');

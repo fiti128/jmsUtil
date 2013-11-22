@@ -27,11 +27,17 @@ public class JmsSenderController {
 
     @RequestMapping( method = RequestMethod.POST)
     public @ResponseBody
-    String getJmsConfigurationList(@RequestParam(required = true) String sendConfigurationId,@RequestParam(required = true) String xmlString) {
+    JmsMessage getJmsConfigurationList(@RequestParam(required = true) String sendConfigurationId,@RequestParam(required = true) String xmlString) {
 
 //        JmsConfiguration jmsConfiguration = JmsConfiguration.findJmsConfiguration(sendConfigurationId);
+        if (xmlString == null || xmlString.trim().length() < 1) {
+            xmlString = "Привет чувак!";
+        }
         JmsConfiguration jmsConfiguration = null;
         boolean success = sendMessageService.sendMessage(xmlString,jmsConfiguration);
-        return success ? "Сообщение послано успешно!" : "Возникла ошибка при отправке сообщения";
+        String result = success ? "Сообщение послано успешно!" : "Возникла ошибка при отправке сообщения";
+        JmsMessage jmsMessage = new JmsMessage();
+        jmsMessage.setMessageBody(result);
+        return jmsMessage;
     }
 }

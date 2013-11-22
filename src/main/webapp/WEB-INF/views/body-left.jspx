@@ -13,7 +13,7 @@
         <br/>
         <div>
 
-        <pre id="result" hidden="true"> </pre>
+        <pre id="result">На этом месте должен быть xml</pre>
         </div>
         <p id = "sendResult" hidden="true"> </p>
     </form>

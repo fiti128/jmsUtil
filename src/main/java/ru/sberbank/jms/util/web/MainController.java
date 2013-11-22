@@ -74,7 +74,6 @@ public class MainController {
             e.printStackTrace();
         }
         System.out.println(activeMQConnectionFactory.getBrokerURL());
-        jmsTopicTemplate.convertAndSend("Hi чувак");
         JmsConfiguration jmsConfiguration = new JmsConfiguration();
         uiModel.addAttribute("jmsConfig",jmsConfiguration);
         uiModel.addAttribute("configurationList",configurationList);

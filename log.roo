@@ -35,3 +35,9 @@ entity jpa --class ~.domain.JmsMessage --testAutomatically
 field string --fieldName messageBody --notNull 
 quit
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-11-21 17:22:08
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-22 10:56:46
+quit
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-11-22 10:57:40
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-22 11:38:15
+quit
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-11-22 12:34:18

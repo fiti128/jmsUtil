@@ -30,6 +30,9 @@ privileged aspect JmsMessageDataOnDemand_Roo_DataOnDemand {
     
     public void JmsMessageDataOnDemand.setMessageBody(JmsMessage obj, int index) {
         String messageBody = "messageBody_" + index;
+        if (messageBody.length() > 5020000) {
+            messageBody = messageBody.substring(0, 5020000);
+        }
         obj.setMessageBody(messageBody);
     }
     

@@ -2,6 +2,7 @@ package ru.sberbank.jms.util.messaging;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.command.ActiveMQQueue;
+import org.apache.activemq.network.jms.JmsQueueConnector;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 import ru.sberbank.jms.util.domain.JmsConfiguration;
@@ -27,6 +28,7 @@ public class ManagingSendMessagesService {
     }
 
     public boolean sendMessage(String xmlString, JmsConfiguration jmsConfiguration) {
+        boolean result = true;
         jmsConfiguration = jmsConfiguration == null ? defaultConfig : jmsConfiguration;
         ConnectionFactory cf = new ActiveMQConnectionFactory(jmsConfiguration.getUrl());
         Connection conn = null;
@@ -34,7 +36,8 @@ public class ManagingSendMessagesService {
         try {
             conn = cf.createConnection();
             session = conn.createSession(false,Session.AUTO_ACKNOWLEDGE);
-            Destination destination = new ActiveMQQueue(jmsConfiguration.getQueueName());
+            JmsQueue jmsQueue = JmsQueue.QUEUE;
+            Destination destination = DestinationFactory.getDestination(jmsQueue, jmsConfiguration.getQueueName());
             MessageProducer producer = session.createProducer(destination);
             TextMessage message = session.createTextMessage();
             message.setText(xmlString);
@@ -42,6 +45,7 @@ public class ManagingSendMessagesService {
         }  catch (JMSException e) {
             Logger.getLogger(this.getClass()).error("Error on sending message",e);
             e.printStackTrace();
+            result = false;
         }   finally {
             try {
                 if (session!= null) {
@@ -60,6 +64,6 @@ public class ManagingSendMessagesService {
             }
         }
 
-        return false;
+        return result;
     }
 }
