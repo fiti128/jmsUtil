@@ -1,5 +1,6 @@
 package ru.sberbank.jms.util.messaging;
 
+import org.apache.log4j.Logger;
 import ru.sberbank.jms.util.domain.JmsMessage;
 
 import javax.jms.JMSException;
@@ -12,13 +13,14 @@ public class JmsUtilTopicListener implements MessageListener {
     public void onMessage(Message message) {
         try {
             String text = ((TextMessage)message).getText();
+//            text = new String(text.getBytes("windows-1251"),"UTF-8");
             System.out.println("JMS message received: " + text);
             JmsMessage jmsMessage = new JmsMessage();
             jmsMessage.setMessageBody(text);
 
             jmsMessage.persist();
-        } catch (JMSException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (Exception e) {
+            Logger.getLogger(this.getClass()).error("Error on saving message",e);
         }
     }
 }

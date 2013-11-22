@@ -72,6 +72,21 @@ function receiveJmsMessage() {
     });
 
 }
+function sendMessage() {
+    var jmsConfigurationId = 1;
+    var xml = $('#result').text();
+    $.ajax({
+        type: "post",
+        data: ({sendConfigurationId : jmsConfigurationId, xmlString : xml}),
+        url: 'send',
+        success: function(response) {
+            $('#sendResult').text(response).attr('hidden',false);
+                },
+        error: function() {
+            alert('Error while request...');
+        }
+    })
+}
 //$(document).ready(receiveJmsMessage());
 setInterval('receiveJmsMessage()',interval);
 

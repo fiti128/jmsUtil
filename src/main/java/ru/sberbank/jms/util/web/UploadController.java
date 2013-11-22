@@ -5,16 +5,13 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import ru.sberbank.jms.util.domain.JmsConfiguration;
 import ru.sberbank.jms.util.domain.XmlMessage;
-import ru.sberbank.jms.util.jmx.ManagingReceiveMessagesService;
 import ru.sberbank.jms.util.xml.UpdateUidService;
 
-import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.Iterator;
 import java.util.List;

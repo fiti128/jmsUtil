@@ -1,8 +1,9 @@
-package ru.sberbank.jms.util.jmx;
+package ru.sberbank.jms.util.messaging;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.command.ActiveMQQueue;
 import org.apache.activemq.command.ActiveMQTopic;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.listener.AbstractMessageListenerContainer;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,14 @@ import java.util.concurrent.TimeUnit;
  */
 @Service
 public class ManagingReceiveMessagesService {
+    public static  JmsConfiguration defaultConfig;
+
+    static {
+        defaultConfig = new JmsConfiguration();
+        defaultConfig.setUrl("vm://localhost:61616");
+        defaultConfig.setQueueNameReceive("jms.topic.JmsUtil");
+    }
+
     @Resource(name = "jmsContainer")
     private AbstractMessageListenerContainer container;
 
@@ -61,7 +70,9 @@ public class ManagingReceiveMessagesService {
             System.out.println("Non spring message: " +message.getText());
             conn.stop();
         }   catch (JMSException e) {
+            Logger.getLogger(this.getClass()).error("Error on receiving message",e);
             e.printStackTrace();
+
             throw new RuntimeException(e);
         }    finally {
             try {
@@ -88,14 +99,14 @@ public class ManagingReceiveMessagesService {
     }
 
     public void updateJmsMessages(JmsConfiguration jmsConfiguration) {
-        checkJmsConfiguration(jmsConfiguration);
-        ConnectionFactory factory = new ActiveMQConnectionFactory("vm://localhost:61616");
+        jmsConfiguration = jmsConfiguration == null ? defaultConfig : jmsConfiguration;
+        ConnectionFactory factory = new ActiveMQConnectionFactory(jmsConfiguration.getUrl());
         Connection conn = null;
         Session session = null;
         try{
             conn = factory.createConnection();
             session = conn.createSession(false, Session.AUTO_ACKNOWLEDGE);
-            Destination destination = new ActiveMQQueue("jms.topic.JmsUtil");
+            Destination destination = new ActiveMQQueue(jmsConfiguration.getQueueNameReceive());
             MessageConsumer consumer = session.createConsumer(destination);
 //            TextMessage message = (TextMessage)consumer.receive(1000);
             consumer.setMessageListener(messageListener);

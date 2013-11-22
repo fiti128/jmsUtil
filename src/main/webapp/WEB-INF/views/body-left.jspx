@@ -9,6 +9,12 @@
     <form>
         <input id="fileupload" type="file" name="files[]" data-url="upload"/>
         <br/>
-        <pre id="result" hidden="true" col="100"  data-role="none"> </pre>
+        <input hidden="false" type="button" value="Послать" class="btn btn-primary" onclick="sendMessage()"/>
+        <br/>
+        <div>
+
+        <pre id="result" hidden="true"> </pre>
+        </div>
+        <p id = "sendResult" hidden="true"> </p>
     </form>
 </div>

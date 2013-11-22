@@ -28,21 +28,10 @@
         <property name="connectionFactory" ref="cachingConnectionFactory"/>
         <property name="defaultDestinationName" value="jms.topic.JmsUtil"/>
     </bean>
-    <!--<amq:topic id="jms.topic.JmsUtil" physicalName="jms.topic.JmsUtil"/>-->
 
-    <!--<jms:listener-container client-id="listenerContainer" connection-factory="jmsFactory" destination-type="queue" receive-timeout="5000000" >-->
-        <!--<jms:listener destination="jms.topic.JmsUtil" method="onMessage" ref="jmsUtilTopicListener"/>-->
-    <!--</jms:listener-container>-->
-    <!--<bean id="messageReceiveService" class="ru.sberbank.jms.util.messaging.MesssageReceiveServiceImpl" ></bean>-->
     <bean class="ru.sberbank.jms.util.messaging.JmsUtilTopicListener" id="jmsUtilTopicListener"/>
 
-    <!--<bean id="receiveService" class="org.springframework.jms.remoting.JmsInvokerProxyFactoryBean"-->
-            <!--p:connectionFactory-ref="jmsFactory"-->
-            <!--p:queueName="jms.topic.JmsUtil"-->
-            <!--p:serviceInterface="ru.sberbank.jms.util.messaging.MessageReceiveService"-->
-            <!--p:receiveTimeout="20000"-->
-            <!-->-->
-    <!--</bean>-->
+
     <bean id="jmsContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
         <property name="connectionFactory" ref="jmsFactory"/>
         <property name="destinationName" value="jms.topic.JmsUtil"/>

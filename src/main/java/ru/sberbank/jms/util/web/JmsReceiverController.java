@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import ru.sberbank.jms.util.domain.JmsConfiguration;
 import ru.sberbank.jms.util.domain.JmsMessage;
-import ru.sberbank.jms.util.jmx.ManagingReceiveMessagesService;
+import ru.sberbank.jms.util.messaging.ManagingReceiveMessagesService;
 
 import java.util.List;
 
@@ -30,7 +30,8 @@ public class JmsReceiverController {
     public @ResponseBody
     List<JmsMessage> getJmsConfigurationList(@RequestParam(required = false) String receiveConfigurationId) {
 
-        JmsConfiguration jmsConfiguration = JmsConfiguration.findJmsConfiguration(receiveConfigurationId);
+//        JmsConfiguration jmsConfiguration = JmsConfiguration.findJmsConfiguration(receiveConfigurationId);
+        JmsConfiguration jmsConfiguration =null;
         List<JmsMessage> list = JmsMessage.findAllJmsMessages();
         managingReceiveMessagesService.updateJmsMessages(jmsConfiguration);
         List<JmsMessage> newList = JmsMessage.findAllJmsMessages();
@@ -40,14 +41,6 @@ public class JmsReceiverController {
             }
         }
         list = JmsMessage.findAllJmsMessages();
-//
-//        JmsMessage jmsMessage = managingReceiveMessagesService.getAvailableMessages();
-//        jmsMessage.setMessageBody("Received message");
-//        JmsMessage newJmsMessage = new JmsMessage();
-//        newJmsMessage.setMessageBody("Additional message");
-//        List<JmsMessage> list = new ArrayList<JmsMessage>();
-//        list.add(jmsMessage);
-//        list.add(newJmsMessage);
 
 
         return list;
