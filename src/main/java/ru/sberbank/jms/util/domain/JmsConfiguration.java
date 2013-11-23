@@ -4,12 +4,13 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
 import org.springframework.roo.addon.plural.RooPlural;
 import org.springframework.roo.addon.tostring.RooToString;
-
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.persistence.Enumerated;
+import ru.sberbank.jms.util.messaging.JmsQueue;
 
 @RooJavaBean
 @RooToString
@@ -46,4 +47,9 @@ public class JmsConfiguration {
      */
     @Size(min = 3)
     private String queueNameReceive;
+
+    /**
+     */
+    @Enumerated
+    private JmsQueue queueType;
 }

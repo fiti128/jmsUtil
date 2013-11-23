@@ -41,3 +41,7 @@ quit
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-22 11:38:15
 quit
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-11-22 12:34:18
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-22 12:35:57
+field enum --type ~.messaging.JmsQueue --fieldName queueType --class ~.domain.JmsConfiguration
+quit
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-11-22 13:39:54

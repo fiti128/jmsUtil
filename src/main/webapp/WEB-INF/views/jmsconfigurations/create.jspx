@@ -8,6 +8,7 @@
         <field:input field="queueName" id="c_ru_sberbank_jms_util_domain_JmsConfiguration_queueName" min="3" required="true" z="65IEzqB5CKo40KixS7Z0qitTmm8="/>
         <field:input field="delay" id="c_ru_sberbank_jms_util_domain_JmsConfiguration_delay" max="999999" min="5" required="true" z="0Ij7KhQv27WuInVfRT3ZrJrKFNw="/>
         <field:input field="queueNameReceive" id="c_ru_sberbank_jms_util_domain_JmsConfiguration_queueNameReceive" min="3" required="true" z="3QLJb9W2fS4X/9ZyQnIYYtEoBKk="/>
+        <field:select field="queueType" id="c_ru_sberbank_jms_util_domain_JmsConfiguration_queueType" items="${jmsqueues}" path="jmsqueues" z="YRBmR+b89pL/T94Akyk2R5uDck4="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_ru_sberbank_jms_util_domain_JmsConfiguration" render="${not empty dependencies}" z="Egg9STQhG/1cz0F1bF+85A2/zgE="/>
 </div>

@@ -4,6 +4,7 @@
 package ru.sberbank.jms.util.domain;
 
 import ru.sberbank.jms.util.domain.JmsConfiguration;
+import ru.sberbank.jms.util.messaging.JmsQueue;
 
 privileged aspect JmsConfiguration_Roo_JavaBean {
     
@@ -45,6 +46,14 @@ privileged aspect JmsConfiguration_Roo_JavaBean {
     
     public void JmsConfiguration.setQueueNameReceive(String queueNameReceive) {
         this.queueNameReceive = queueNameReceive;
+    }
+    
+    public JmsQueue JmsConfiguration.getQueueType() {
+        return this.queueType;
+    }
+    
+    public void JmsConfiguration.setQueueType(JmsQueue queueType) {
+        this.queueType = queueType;
     }
     
 }

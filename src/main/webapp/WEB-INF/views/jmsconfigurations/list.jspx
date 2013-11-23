@@ -8,6 +8,7 @@
             <table:column id="c_ru_sberbank_jms_util_domain_JmsConfiguration_queueName" property="queueName" z="5X408JE8hPFKOF6G7DVeDdVsPrU="/>
             <table:column id="c_ru_sberbank_jms_util_domain_JmsConfiguration_delay" property="delay" z="QJxV477ogREN0TqOFZvJMIX47N0="/>
             <table:column id="c_ru_sberbank_jms_util_domain_JmsConfiguration_queueNameReceive" property="queueNameReceive" z="fGj32vzwLNOG+g6S8hb6Q4sZcl8="/>
+            <table:column id="c_ru_sberbank_jms_util_domain_JmsConfiguration_queueType" property="queueType" z="//5i0ACTITOcUXv9utd7iypr1lE="/>
         </table:table>
     </page:list>
 </div>

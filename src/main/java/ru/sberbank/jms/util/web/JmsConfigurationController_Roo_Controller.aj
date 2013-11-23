@@ -4,6 +4,7 @@
 package ru.sberbank.jms.util.web;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.springframework.ui.Model;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 import ru.sberbank.jms.util.domain.JmsConfiguration;
+import ru.sberbank.jms.util.messaging.JmsQueue;
 import ru.sberbank.jms.util.web.JmsConfigurationController;
 
 privileged aspect JmsConfigurationController_Roo_Controller {
@@ -86,6 +88,7 @@ privileged aspect JmsConfigurationController_Roo_Controller {
     
     void JmsConfigurationController.populateEditForm(Model uiModel, JmsConfiguration jmsConfiguration) {
         uiModel.addAttribute("jmsConfiguration", jmsConfiguration);
+        uiModel.addAttribute("jmsqueues", Arrays.asList(JmsQueue.values()));
     }
     
     String JmsConfigurationController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {
