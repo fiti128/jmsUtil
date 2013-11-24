@@ -28,8 +28,7 @@ public class UploadController {
     public static final String ERROR_UPLOAD_STRING_NOT_XML = "Для загрузки требуется xml файл!";
     public static final String UPLOAD_EXTENSION_PATTERN = ".*xml";
     public static final String DEFAULT_ENCODING = "Windows-1251";
-    @Autowired
-    private transient JmsTemplate jmsTopicTemplate;
+
 
     @Autowired
     UpdateUidService updateUidService;

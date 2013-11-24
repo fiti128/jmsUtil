@@ -3,7 +3,7 @@
 
 package ru.sberbank.jms.util.domain;
 
-import ru.sberbank.jms.util.domain.JmsConfiguration;
+
 import ru.sberbank.jms.util.messaging.JmsQueue;
 
 privileged aspect JmsConfiguration_Roo_JavaBean {

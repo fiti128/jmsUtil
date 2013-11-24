@@ -33,7 +33,7 @@ public class JmsReceiverController {
 //        JmsConfiguration jmsConfiguration = JmsConfiguration.findJmsConfiguration(receiveConfigurationId);
         JmsConfiguration jmsConfiguration =null;
 //        List<JmsMessage> list = JmsMessage.findAllJmsMessages();
-//        managingReceiveMessagesService.updateJmsMessages(jmsConfiguration);
+        managingReceiveMessagesService.updateJmsMessages(jmsConfiguration);
 //        List<JmsMessage> newList = JmsMessage.findAllJmsMessages();
 //        if (newList.size()!=list.size()){
 //            for (JmsMessage jmsMessage : list) {
