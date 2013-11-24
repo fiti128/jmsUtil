@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
  * To change this template use File | Settings | File Templates.
  */
 @Service
-public class ManagingReceiveMessagesService {
+public class ReceiveMessagesServiceActiveMQImpl implements ReceiveMessageService {
     public static  JmsConfiguration defaultConfig;
 
     static {
@@ -28,58 +28,8 @@ public class ManagingReceiveMessagesService {
         defaultConfig.setQueueNameReceive("jms.topic.JmsUtil");
     }
 
-
     @Autowired
     MessageListener messageListener;
-    public void receiveAttempt(){
-                  nonSpringJMS();
-//        springJms();
-    }
-
-
-
-    private void nonSpringJMS() {
-        ConnectionFactory factory = new ActiveMQConnectionFactory("vm://localhost:61616");
-        Connection conn = null;
-        Session session = null;
-        try{
-            conn = factory.createConnection();
-            conn.start();
-            session = conn.createSession(false, Session.AUTO_ACKNOWLEDGE);
-            Destination destination = new ActiveMQQueue("jms.topic.JmsUtil");
-            MessageConsumer consumer = session.createConsumer(destination);
-            TextMessage message = (TextMessage)consumer.receive(1000);
-
-            System.out.println("Non spring message: " +message.getText());
-            conn.stop();
-        }   catch (JMSException e) {
-            Logger.getLogger(this.getClass()).error("Error on receiving message",e);
-            e.printStackTrace();
-
-            throw new RuntimeException(e);
-        }    finally {
-            try {
-                if (session!= null) {
-                    session.close();
-                }
-
-            }  catch (JMSException ex) {
-
-            }
-            try {
-                if (conn!=null) {
-                    conn.close();
-                }
-            }  catch (JMSException ex) {
-
-            }
-        }
-    }
-
-    public JmsMessage getAvailableMessages() {
-        receiveAttempt();
-        return new JmsMessage();
-    }
 
     public void updateJmsMessages(JmsConfiguration jmsConfiguration) {
         jmsConfiguration = jmsConfiguration == null ? defaultConfig : jmsConfiguration;
@@ -121,7 +71,5 @@ public class ManagingReceiveMessagesService {
         }
     }
 
-    private void checkJmsConfiguration(JmsConfiguration jmsConfiguration) {
 
-    }
 }

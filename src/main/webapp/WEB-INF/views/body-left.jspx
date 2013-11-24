@@ -9,12 +9,13 @@
     <form>
         <input id="fileupload" type="file" name="files[]" data-url="upload"/>
         <br/>
-        <input hidden="false" type="button" value="Послать" class="btn btn-primary" onclick="sendMessage()"/>
+        <input id="sendButton" hidden="false" type="button" value="Послать" class="btn btn-primary" onclick="sendMessage()"/>
         <br/>
+        <p id = "sendResult" hidden="true"> </p>
          <br/>
            <pre id="result">На этом месте должен быть xml</pre>
 
 
-        <p id = "sendResult" hidden="true"> </p>
+
     </form>
 </div>

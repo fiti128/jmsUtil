@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ru.sberbank.jms.util.domain.JmsConfiguration;
+import ru.sberbank.jms.util.messaging.ReceiveMessagesServiceWebsphereMQImpl;
+import ru.sberbank.jms.util.messaging.SendMessagesServiceWebsphereMqImpl;
 
 
 /**
@@ -36,8 +38,8 @@ public class MainController {
         }
 
         JmsConfiguration jmsConfiguration = new JmsConfiguration();
-        uiModel.addAttribute("jmsConfig",jmsConfiguration);
-        uiModel.addAttribute("configurationList",configurationList);
+        uiModel.addAttribute("senderConfig", SendMessagesServiceWebsphereMqImpl.DEFAULT_MQ_CONFIG);
+        uiModel.addAttribute("receiverConfig", ReceiveMessagesServiceWebsphereMQImpl.DEFAULT_MQ_CONFIG);
         return "index";
     }
 

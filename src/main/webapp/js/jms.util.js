@@ -41,8 +41,12 @@ var interval = 5000;
 function receiveJmsMessage() {
     console.info('In receive. Interval is' + interval);
     var jmsConfigurationId = 1;
-    var delay =  $('delayId').text();
-    if (!isNaN(delay) && delay > 0) {
+    var delay =  $('#delayId').val();
+    console.info('delay is' + delay);
+    if (!isNaN(delay) && delay > 5) {
+        if (delay < 1000) {
+            delay = delay *1000;
+        }
         console.info(delay + " is number");
         interval = delay;
     }
@@ -77,19 +81,27 @@ function receiveJmsMessage() {
 
 }
 function sendMessage() {
-    var jmsConfigurationId = 1;
+    $('#sendButton').attr('style','display: none');
     var xml = $('#result').text();
     $.ajax({
         type: "post",
-        data: ({sendConfigurationId : jmsConfigurationId, xmlString : xml}),
+        data: ({host : $('#senderHost').val(),
+            port : $('#senderPort').val(),
+            channel : $('#senderChannel').val(),
+            managerName : $('#senderQueueManagerName').val(),
+            destinationName : $('#senderDestinationName').val(),
+            isTopic : $('#senderIsTopic').val(),
+            xmlString : xml}),
         url: 'send',
         success: function(response) {
             $('#sendResult').text(response.messageBody).attr('hidden',false);
+            $('#sendButton').attr('style','display: block');
                 },
         error: function() {
             alert('Error while request...');
         }
     })
+
 }
 //$(document).ready(receiveJmsMessage());
 var refreshIntervalId;

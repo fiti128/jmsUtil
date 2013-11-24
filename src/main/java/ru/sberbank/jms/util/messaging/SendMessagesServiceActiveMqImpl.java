@@ -16,7 +16,7 @@ import javax.jms.*;
  * To change this template use File | Settings | File Templates.
  */
 @Service
-public class ManagingSendMessagesService {
+public class SendMessagesServiceActiveMqImpl {
     public static  JmsConfiguration defaultConfig;
 
    static {

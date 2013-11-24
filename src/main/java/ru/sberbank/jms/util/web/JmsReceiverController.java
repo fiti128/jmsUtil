@@ -1,6 +1,7 @@
 package ru.sberbank.jms.util.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -8,7 +9,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import ru.sberbank.jms.util.domain.JmsConfiguration;
 import ru.sberbank.jms.util.domain.JmsMessage;
-import ru.sberbank.jms.util.messaging.ManagingReceiveMessagesService;
+import ru.sberbank.jms.util.domain.MqConfig;
+import ru.sberbank.jms.util.messaging.ReceiveMessageService;
+import ru.sberbank.jms.util.messaging.ReceiveMessagesServiceWebsphereMQImpl;
+import ru.sberbank.jms.util.messaging.SendMessagesServiceWebsphereMqImpl;
 import ru.sberbank.jms.util.services.MessageStorageService;
 
 import java.util.ArrayList;
@@ -26,18 +30,33 @@ import java.util.List;
 public class JmsReceiverController {
 
     @Autowired
-    private transient ManagingReceiveMessagesService managingReceiveMessagesService;
+    @Qualifier(value = "websphereMq")
+    private transient ReceiveMessageService receiveMessageService;
 
     @Autowired
     private transient MessageStorageService messageStorageService;
 
     @RequestMapping( method = RequestMethod.POST)
     public @ResponseBody
-    List<JmsMessage> getJmsConfigurationList(@RequestParam(required = false) String receiveConfigurationId) {
+    List<JmsMessage> getJmsConfigurationList(@RequestParam(required = true) String host,
+                                             @RequestParam(required = true) int port,
+                                             @RequestParam(required = true) String channel,
+                                             @RequestParam(required = true) String managerName,
+                                             @RequestParam(required = true) String destinationName,
+                                             @RequestParam(required = true) boolean isTopic) {
 
+        MqConfig mqConfig = new MqConfig();
+        mqConfig.setHost(host);
+        mqConfig.setPort(port);
+        mqConfig.setChannel(channel);
+        mqConfig.setQueueManagerName(managerName);
+        mqConfig.setDestinationName(destinationName);
+        mqConfig.setIS_TOPIC(isTopic);
+
+        ReceiveMessagesServiceWebsphereMQImpl.DEFAULT_MQ_CONFIG = mqConfig;
         JmsConfiguration jmsConfiguration =null;
 
-        managingReceiveMessagesService.updateJmsMessages(jmsConfiguration);
+        receiveMessageService.updateJmsMessages(jmsConfiguration);
         List<JmsMessage> messageList = new ArrayList<JmsMessage>();
         JmsMessage jmsMessage = new JmsMessage();
         jmsMessage.setMessageBody(messageStorageService.getMessagesFromStorage());
