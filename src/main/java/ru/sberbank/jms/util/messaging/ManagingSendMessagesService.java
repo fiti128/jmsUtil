@@ -1,8 +1,6 @@
 package ru.sberbank.jms.util.messaging;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
-import org.apache.activemq.command.ActiveMQQueue;
-import org.apache.activemq.network.jms.JmsQueueConnector;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 import ru.sberbank.jms.util.domain.JmsConfiguration;

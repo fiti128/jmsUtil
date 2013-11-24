@@ -14,7 +14,6 @@ import ru.sberbank.jms.util.xml.UpdateUidService;
 
 import java.io.*;
 import java.util.Iterator;
-import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -74,19 +73,5 @@ public class UploadController {
         return DEFAULT_ENCODING;
     }
 
-    @RequestMapping(value = "/sendMessage", method = RequestMethod.POST)
-    public @ResponseBody
-    XmlMessage sendMessage(MultipartHttpServletRequest request)  {
 
-        JmsConfiguration jmsConfiguration = new JmsConfiguration();
-        List<JmsConfiguration> jmsConfigurationList = JmsConfiguration.findAllOptions();
-        for (JmsConfiguration config : jmsConfigurationList) {
-            if (config.getConfigurationName().equals("name")) {
-                jmsConfiguration = config;
-            }
-        }
-        jmsTopicTemplate.convertAndSend(xmlMessage.getXmlText());
-
-        return xmlMessage;
-    }
 }

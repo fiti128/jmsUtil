@@ -3,7 +3,6 @@ package ru.sberbank.jms.util.messaging;
 import org.apache.log4j.Logger;
 import ru.sberbank.jms.util.domain.JmsMessage;
 
-import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.TextMessage;
@@ -18,7 +17,6 @@ public class JmsUtilTopicListener implements MessageListener {
             JmsMessage jmsMessage = new JmsMessage();
             jmsMessage.setMessageBody(text);
 
-            jmsMessage.persist();
         } catch (Exception e) {
             Logger.getLogger(this.getClass()).error("Error on saving message",e);
         }

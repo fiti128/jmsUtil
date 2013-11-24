@@ -10,7 +10,6 @@ import ru.sberbank.jms.util.domain.JmsConfiguration;
 import ru.sberbank.jms.util.domain.JmsMessage;
 import ru.sberbank.jms.util.messaging.ManagingSendMessagesService;
 
-import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.

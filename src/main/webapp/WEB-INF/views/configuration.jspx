@@ -12,23 +12,23 @@
     <jsp:output omit-xml-declaration="yes"/>
 
 
-    <div class="row">
-        <div class="col-md-6">
-            <a href="jmsconfigurations?form" name="${fn:escapeXml(menu_new)}" title="${fn:escapeXml(menu_new)}">
-                ${fn:escapeXml(menu_new)}
-            </a>
-        </div>
-        <div class="col-md-6">
-            <div class="text-center">
-                <select id="selection" onchange="madeAjaxCall(this.id,'getConfigurationList')">
-                    <option>Выберите Конфигурацию</option>
-                    <c:forEach var="item" items="${configurationList}" >
-                        <option value="${item}">${item}</option>
-                    </c:forEach>
-                </select>
-            </div>
-          </div>
-    </div>
+    <!--<div class="row">-->
+        <!--<div class="col-md-6">-->
+            <!--<a href="jmsconfigurations?form" name="${fn:escapeXml(menu_new)}" title="${fn:escapeXml(menu_new)}">-->
+                <!--${fn:escapeXml(menu_new)}-->
+            <!--</a>-->
+        <!--</div>-->
+        <!--<div class="col-md-6">-->
+            <!--<div class="text-center">-->
+                <!--<select id="selection" onchange="madeAjaxCall(this.id,'getConfigurationList')">-->
+                    <!--<option>Выберите Конфигурацию</option>-->
+                    <!--<c:forEach var="item" items="${configurationList}" >-->
+                        <!--<option value="${item}">${item}</option>-->
+                    <!--</c:forEach>-->
+                <!--</select>-->
+            <!--</div>-->
+          <!--</div>-->
+    <!--</div>-->
     <br/>
     <div id="selection">
             <div class="form-horizontal">

@@ -5,14 +5,12 @@ package ru.sberbank.jms.util.xml;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.jdom2.Document;
 import org.jdom2.Element;
-import org.jdom2.Namespace;
 import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayInputStream;
-import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -36,7 +34,7 @@ public class UpdateUidServiceImpl implements UpdateUidService {
         try {
         SAXBuilder builder = new SAXBuilder();
 
-        Document doc = (Document) builder.build(new ByteArrayInputStream(xml.getBytes(Charset.forName(ENCODING))));
+        Document doc = (Document) builder.build(new ByteArrayInputStream(xml.getBytes(ENCODING)));
         Element rootNode = doc.getRootElement();
 
         List<Element> elementList = rootNode.getChildren();

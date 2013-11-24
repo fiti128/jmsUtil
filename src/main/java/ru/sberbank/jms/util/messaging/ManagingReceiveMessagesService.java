@@ -2,15 +2,12 @@ package ru.sberbank.jms.util.messaging;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.command.ActiveMQQueue;
-import org.apache.activemq.command.ActiveMQTopic;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jms.listener.AbstractMessageListenerContainer;
 import org.springframework.stereotype.Service;
 import ru.sberbank.jms.util.domain.JmsConfiguration;
 import ru.sberbank.jms.util.domain.JmsMessage;
 
-import javax.annotation.Resource;
 import javax.jms.*;
 import java.util.concurrent.TimeUnit;
 
@@ -31,8 +28,6 @@ public class ManagingReceiveMessagesService {
         defaultConfig.setQueueNameReceive("jms.topic.JmsUtil");
     }
 
-    @Resource(name = "jmsContainer")
-    private AbstractMessageListenerContainer container;
 
     @Autowired
     MessageListener messageListener;
@@ -41,19 +36,7 @@ public class ManagingReceiveMessagesService {
 //        springJms();
     }
 
-    private void springJms() {
-        System.out.println("Looking queeName: " + container.getDestinationName());
 
-        container.start();
-
-
-        try {
-            TimeUnit.SECONDS.sleep(3);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        container.stop();
-    }
 
     private void nonSpringJMS() {
         ConnectionFactory factory = new ActiveMQConnectionFactory("vm://localhost:61616");
