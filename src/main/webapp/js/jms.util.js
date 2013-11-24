@@ -39,9 +39,11 @@ $(function () {
 });
 var interval = 5000;
 function receiveJmsMessage() {
+    console.info('In receive. Interval is' + interval);
     var jmsConfigurationId = 1;
     var delay =  $('delayId').text();
-    if (!isNaN(delay)) {
+    if (!isNaN(delay) && delay > 0) {
+        console.info(delay + " is number");
         interval = delay;
     }
     $.ajax({
@@ -63,7 +65,9 @@ function receiveJmsMessage() {
                 if (response.length > 0) {
                      htmlElement.attr('hidden',false);
                 }
-            htmlElement.text(xmlBody);
+                if (xmlBody.length > 1) {
+                     htmlElement.text(xmlBody);
+                }
 
         },
         error: function() {
@@ -88,5 +92,17 @@ function sendMessage() {
     })
 }
 //$(document).ready(receiveJmsMessage());
-setInterval('receiveJmsMessage()',interval);
+var refreshIntervalId;
+function startReceivingMessages() {
+    receiveJmsMessage();
+    console.info(interval);
+    refreshIntervalId =  setInterval('receiveJmsMessage()',interval);
+    $('#start').attr('style','display: none');
+    $('#stop').attr('style','display: block');
+}
+function stopReceivingMessages() {
+    clearInterval(refreshIntervalId);
+    $('#start').attr('style','display: block');
+    $('#stop').attr('style','display: none');
+}
 

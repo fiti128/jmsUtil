@@ -5,6 +5,10 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
 
+        <input id="start" style="display: block" type="button" value="Начать прием" class="btn btn-primary" onclick="startReceivingMessages()"/>
 
+
+    <input id="stop" style="display: none" type="button" value="Остановить прием сообщений" class="btn btn-warning" onclick="stopReceivingMessages()"/>
+    <br/>
     <pre id="receivedXml" hidden="true"> </pre>
 </div>

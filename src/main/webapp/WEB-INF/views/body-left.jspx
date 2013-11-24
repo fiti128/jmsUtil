@@ -11,10 +11,10 @@
         <br/>
         <input hidden="false" type="button" value="Послать" class="btn btn-primary" onclick="sendMessage()"/>
         <br/>
-        <div>
+         <br/>
+           <pre id="result">На этом месте должен быть xml</pre>
 
-        <pre id="result">На этом месте должен быть xml</pre>
-        </div>
+
         <p id = "sendResult" hidden="true"> </p>
     </form>
 </div>

@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import ru.sberbank.jms.util.domain.JmsConfiguration;
 import ru.sberbank.jms.util.domain.JmsMessage;
 import ru.sberbank.jms.util.messaging.ManagingReceiveMessagesService;
+import ru.sberbank.jms.util.services.MessageStorageService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,23 +28,22 @@ public class JmsReceiverController {
     @Autowired
     private transient ManagingReceiveMessagesService managingReceiveMessagesService;
 
+    @Autowired
+    private transient MessageStorageService messageStorageService;
+
     @RequestMapping( method = RequestMethod.POST)
     public @ResponseBody
     List<JmsMessage> getJmsConfigurationList(@RequestParam(required = false) String receiveConfigurationId) {
 
-//        JmsConfiguration jmsConfiguration = JmsConfiguration.findJmsConfiguration(receiveConfigurationId);
         JmsConfiguration jmsConfiguration =null;
-//        List<JmsMessage> list = JmsMessage.findAllJmsMessages();
+
         managingReceiveMessagesService.updateJmsMessages(jmsConfiguration);
-//        List<JmsMessage> newList = JmsMessage.findAllJmsMessages();
-//        if (newList.size()!=list.size()){
-//            for (JmsMessage jmsMessage : list) {
-//                jmsMessage.remove();
-//            }
-//        }
-//        list = JmsMessage.findAllJmsMessages();
+        List<JmsMessage> messageList = new ArrayList<JmsMessage>();
+        JmsMessage jmsMessage = new JmsMessage();
+        jmsMessage.setMessageBody(messageStorageService.getMessagesFromStorage());
+        messageStorageService.clearStorage();
+        messageList.add(jmsMessage);
 
-
-        return null;
+        return messageList;
     }
 }
