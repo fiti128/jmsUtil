@@ -149,13 +149,13 @@ function stopService() {
         }
     })
 }
-$(function() {
-    $('#selection').accordion({
-        header: "h2",
-        collapsible: true
-    });
-
-});
+//$(function() {
+//    $('#selection').accordion({
+//        header: "h2",
+//        collapsible: true
+//    });
+//
+//});
 //$(document).ready(function() {
 //    $('#fileupload').attr('data-url',window.location.pathname +'/upload');
 //});
