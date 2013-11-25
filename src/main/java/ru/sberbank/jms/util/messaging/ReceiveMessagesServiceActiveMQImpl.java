@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.sberbank.jms.util.domain.JmsConfiguration;
 import ru.sberbank.jms.util.domain.JmsMessage;
+import ru.sberbank.jms.util.domain.MqConfig;
 
 import javax.jms.*;
 import java.util.concurrent.TimeUnit;
@@ -69,6 +70,14 @@ public class ReceiveMessagesServiceActiveMQImpl implements ReceiveMessageService
 
             }
         }
+    }
+
+    public boolean startConnection(MqConfig mqconfig) {
+        return false;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    public void stopConnection() {
+        //To change body of implemented methods use File | Settings | File Templates.
     }
 
 

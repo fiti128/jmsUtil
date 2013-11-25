@@ -7,8 +7,40 @@
 			
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=8" />	
-		<util:load-scripts />
+		<meta http-equiv="X-UA-Compatible" content="IE=8" />
+        <spring:theme code="styleSheet" var="roo_css" />
+        <spring:url value="/${roo_css}" var="roo_css_url" />
+        <spring:url value="/resources/dojo/dojo.js" var="dojo_url" />
+        <spring:url value="/resources/dijit/themes/tundra/tundra.css" var="tundra_url" />
+        <spring:url value="/resources/js/jquery-2.0.3.min.js" var="jquery_url"/>
+        <spring:url value="/resources/spring/Spring.js" var="spring_url" />
+        <spring:url value="/resources/spring/Spring-Dojo.js" var="spring_dojo_url" />
+        <spring:url value="/resources/images/favicon.ico" var="favicon" />
+        <spring:url value="/resources/js/jquery.fileupload.js" var="fileupload_url"/>
+        <spring:url value="/resources/js/jquery.iframe-transport.js" var="transport_url"/>
+        <spring:url value="/resources/js/jms.util.js" var="jms_util_url"/>
+        <spring:url value="/resources/js/vendor/jquery.ui.widget.js" var="widjet_url"/>
+        <spring:url value="/resources/js/jquery-ui.js" var="ui_url"/>
+
+        <link rel="stylesheet" type="text/css" href="${tundra_url}" />
+        <link rel="stylesheet" type="text/css" media="screen" href="${roo_css_url}" />
+        <link rel="SHORTCUT ICON" href="${favicon}" />
+
+        <!-- Get the user local from the page context (it was set by Spring MVC's locale resolver) -->
+
+
+        <script type="text/javascript">var djConfig = {parseOnLoad: false, isDebug: false, locale: '${userLocale}'};</script>
+
+        <script src="${dojo_url}" type="text/javascript">//<!-- required for FF3 and Opera --></script>
+        <script src="${spring_url}" type="text/javascript">//<!-- /required for FF3 and Opera --></script>
+        <script src="${spring_dojo_url}" type="text/javascript">//<!-- required for FF3 and Opera --></script>
+        <script src="${jquery_url}" type="text/javascript">//<!-- required for FF3 and Opera --></script>
+        <script src="${ui_url}" type="text/javascript">//<!-- required for FF3 and Opera --></script>
+        <script src="${widjet_url}" type="text/javascript">//<!-- required for FF3 and Opera --></script>
+        <script src="${transport_url}" type="text/javascript">//<!-- required for FF3 and Opera --></script>
+        <script src="${fileupload_url}" type="text/javascript">//<!-- required for FF3 and Opera --></script>
+        <script src="${jms_util_url}" type="text/javascript">//<!-- required for FF3 and Opera --></script>
+        <script language="JavaScript" type="text/javascript">dojo.require("dojo.parser");</script>
 
 
 		<spring:message code="application_name" var="app_name" htmlEscape="false"/>

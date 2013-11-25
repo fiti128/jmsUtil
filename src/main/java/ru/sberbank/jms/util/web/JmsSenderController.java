@@ -36,6 +36,7 @@ public class JmsSenderController {
                                        @RequestParam(required = true) String channel,
                                        @RequestParam(required = true) String managerName,
                                        @RequestParam(required = true) String destinationName,
+                                       @RequestParam(required = true) String correlationId,
                                        @RequestParam(required = true) boolean isTopic,
                                        @RequestParam(required = true) String xmlString) {
 
@@ -46,7 +47,9 @@ public class JmsSenderController {
         mqConfig.setQueueManagerName(managerName);
         mqConfig.setDestinationName(destinationName);
         mqConfig.setIS_TOPIC(isTopic);
+        mqConfig.setCorrelationId(correlationId);
 
+        System.out.println(mqConfig);
         SendMessagesServiceWebsphereMqImpl.DEFAULT_MQ_CONFIG = mqConfig;
 
         if (xmlString == null || xmlString.trim().length() < 1) {

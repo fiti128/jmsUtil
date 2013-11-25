@@ -1,5 +1,6 @@
 package ru.sberbank.jms.util.services;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
@@ -55,22 +56,28 @@ public class MessageStorageServiceImpl implements MessageStorageService {
     }
 
     public String getMessagesFromStorage() {
-           StringBuilder sb = new StringBuilder();
+        File file = new File(STORAGE_FILE);
+        StringBuilder sb = new StringBuilder();
+        if (file.exists())  {
+            getMessages(file, sb);
+        }
+        return sb.toString();  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    void getMessages(File file, StringBuilder sb) {
         BufferedReader reader = null;
         try {
-            reader = new BufferedReader(new InputStreamReader(new FileInputStream(new File(STORAGE_FILE)),ENCODING));
+            reader = new BufferedReader(new InputStreamReader(new FileInputStream(file),ENCODING));
 
             String str;
             while ((str=reader.readLine()) != null) {
             sb.append(str).append("\n");
             }
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+
+        } catch (Exception e) {
+            Logger.getLogger(this.getClass()).error("Storage error",e);
+            e.printStackTrace();
         } finally {
             try {
                 if (reader != null) {
@@ -80,7 +87,5 @@ public class MessageStorageServiceImpl implements MessageStorageService {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             }
         }
-
-        return sb.toString();  //To change body of implemented methods use File | Settings | File Templates.
     }
 }

@@ -26,6 +26,7 @@ public class SendMessagesServiceWebsphereMqImpl implements SendMessagesService {
     public static int PORT = 1415;
     public static String CHANNEL = "SYSTEM.DEF.SVRCONN";
     public static String QUEUE_MANAGER_NAME = "JMS01.DEMO";
+    public static String CORRELATION_ID= "SBERBANK.MINSK";
     public static String DESTINATION_NAME = "JMS.LQ";
     public static boolean IS_TOPIC = false;
     public static MqConfig DEFAULT_MQ_CONFIG;
@@ -42,6 +43,7 @@ public class SendMessagesServiceWebsphereMqImpl implements SendMessagesService {
         DEFAULT_MQ_CONFIG.setQueueManagerName(QUEUE_MANAGER_NAME);
         DEFAULT_MQ_CONFIG.setDestinationName(DESTINATION_NAME);
         DEFAULT_MQ_CONFIG.setIS_TOPIC(IS_TOPIC);
+        DEFAULT_MQ_CONFIG.setCorrelationId(CORRELATION_ID);
     }
     public boolean sendMessage(String xmlString, MqConfig mqConfig) {
         if (mqConfig==null) {
@@ -54,6 +56,7 @@ public class SendMessagesServiceWebsphereMqImpl implements SendMessagesService {
         String queueManagerName = mqConfig.getQueueManagerName();
         String destinationName = mqConfig.getDestinationName();
         boolean isTopic = mqConfig.isIS_TOPIC();
+        String correlationId = mqConfig.getCorrelationId();
 
         boolean result = true;
         // Variables
@@ -84,8 +87,8 @@ public class SendMessagesServiceWebsphereMqImpl implements SendMessagesService {
                 destination = session.createQueue(destinationName);
             }
             producer = session.createProducer(destination);
-
             TextMessage message = session.createTextMessage(xmlString);
+            message.setJMSCorrelationID(correlationId);
 
             // Start the connection
             connection.start();

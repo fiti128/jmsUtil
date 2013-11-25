@@ -36,13 +36,14 @@ public class JmsReceiverController {
     @Autowired
     private transient MessageStorageService messageStorageService;
 
-    @RequestMapping( method = RequestMethod.POST)
+    @RequestMapping(value = "/start",method = RequestMethod.POST)
     public @ResponseBody
-    List<JmsMessage> getJmsConfigurationList(@RequestParam(required = true) String host,
+    JmsMessage getJmsConfigurationList(@RequestParam(required = true) String host,
                                              @RequestParam(required = true) int port,
                                              @RequestParam(required = true) String channel,
                                              @RequestParam(required = true) String managerName,
                                              @RequestParam(required = true) String destinationName,
+                                             @RequestParam(required = true) String correlationId,
                                              @RequestParam(required = true) boolean isTopic) {
 
         MqConfig mqConfig = new MqConfig();
@@ -52,17 +53,30 @@ public class JmsReceiverController {
         mqConfig.setQueueManagerName(managerName);
         mqConfig.setDestinationName(destinationName);
         mqConfig.setIS_TOPIC(isTopic);
+        mqConfig.setCorrelationId(correlationId);
 
         ReceiveMessagesServiceWebsphereMQImpl.DEFAULT_MQ_CONFIG = mqConfig;
-        JmsConfiguration jmsConfiguration =null;
 
-        receiveMessageService.updateJmsMessages(jmsConfiguration);
+        receiveMessageService.startConnection(mqConfig);
+
+        return new JmsMessage();
+    }
+
+    @RequestMapping(value = "/stop",method = RequestMethod.POST)
+    public @ResponseBody
+    JmsMessage stopConnection() {
+        receiveMessageService.stopConnection();
+                return new JmsMessage();
+    }
+
+    @RequestMapping(value = "/get",method = RequestMethod.POST)
+    public @ResponseBody
+    List<JmsMessage> getMessages() {
         List<JmsMessage> messageList = new ArrayList<JmsMessage>();
         JmsMessage jmsMessage = new JmsMessage();
         jmsMessage.setMessageBody(messageStorageService.getMessagesFromStorage());
         messageStorageService.clearStorage();
         messageList.add(jmsMessage);
-
         return messageList;
     }
 }

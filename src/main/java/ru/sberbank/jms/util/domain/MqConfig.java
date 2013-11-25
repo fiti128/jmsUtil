@@ -19,6 +19,7 @@ public class MqConfig implements Serializable {
     private String queueManagerName;
     private String destinationName;
     private boolean IS_TOPIC;
+    private String correlationId;
 
     public String getHost() {
         return host;
@@ -66,6 +67,14 @@ public class MqConfig implements Serializable {
 
     public void setIS_TOPIC(boolean IS_TOPIC) {
         this.IS_TOPIC = IS_TOPIC;
+    }
+
+    public String getCorrelationId() {
+        return correlationId;
+    }
+
+    public void setCorrelationId(String correlationId) {
+        this.correlationId = correlationId;
     }
 
     @Override

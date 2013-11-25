@@ -1,4 +1,4 @@
-<div class="text-center" id="header" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+<jsp:root  xmlns:jsp="http://java.sun.com/JSP/Page"  xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:spring="http://www.springframework.org/tags" version="2.0">
   <jsp:directive.page contentType="text/html;charset=UTF-8" />
   <jsp:output omit-xml-declaration="yes" />
 
@@ -7,9 +7,12 @@
   <spring:message code="button_home" var="home_label" htmlEscape="false" />
   <spring:message var="app_name" code="application_name" htmlEscape="false" />
   <spring:message code="welcome_titlepane" arguments="${app_name}" var="welcome_label" htmlEscape="false" />
+    <div class="text-center" id="header">
+
   <h3>
-      <a href="${home}" name="${fn:escapeXml(app_name)}" title="${fn:escapeXml(app_name)}">
-      ${fn:escapeXml(app_name)}
+      <a href="${home}" name="${app_name}" title="${app_name}">
+      ${app_name}
   </a>
   </h3>
-</div>
+    </div>
+</jsp:root>

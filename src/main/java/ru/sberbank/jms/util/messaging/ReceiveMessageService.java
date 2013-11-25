@@ -1,6 +1,7 @@
 package ru.sberbank.jms.util.messaging;
 
 import ru.sberbank.jms.util.domain.JmsConfiguration;
+import ru.sberbank.jms.util.domain.MqConfig;
 
 /**
  * Created with IntelliJ IDEA.
@@ -10,5 +11,6 @@ import ru.sberbank.jms.util.domain.JmsConfiguration;
  * To change this template use File | Settings | File Templates.
  */
 public interface ReceiveMessageService {
-    void updateJmsMessages(JmsConfiguration jmsConfiguration);
+    boolean startConnection(MqConfig mqconfig);
+    void stopConnection();
 }

@@ -58,21 +58,25 @@
             <groupId>com.ibm.mq</groupId>
             <artifactId>mq.client</artifactId>
             <version>7.0</version>
+            <!--<scope>provided</scope>-->
         </dependency>
         <dependency>
             <groupId>com.ibm.mq</groupId>
             <artifactId>jms</artifactId>
             <version>7.0</version>
+            <!--<scope>provided</scope>-->
         </dependency>
         <dependency>
             <groupId>com.ibm.mq</groupId>
             <artifactId>jmqi</artifactId>
             <version>7.0</version>
+            <!--<scope>provided</scope>-->
         </dependency>
         <dependency>
             <groupId>com.ibm.mq</groupId>
             <artifactId>dhbcore</artifactId>
             <version>7.0</version>
+            <!--<scope>provided</scope>-->
         </dependency>
         <!-- General dependencies for standard applications -->
         <dependency>
@@ -114,7 +118,7 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
+            <version>2.4</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -188,32 +192,21 @@
             <artifactId>commons-fileupload</artifactId>
             <version>1.2.2</version>
         </dependency>
+
         <dependency>
-            <groupId>javax.servlet.jsp.jstl</groupId>
-            <artifactId>jstl-api</artifactId>
-            <version>1.2</version>
+            <groupId>jstl</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.1.2</version>
         </dependency>
         <dependency>
-            <groupId>org.glassfish.web</groupId>
-            <artifactId>jstl-impl</artifactId>
-            <version>1.2</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.el</groupId>
-            <artifactId>el-api</artifactId>
-            <version>2.2</version>
-            <scope>provided</scope>
+            <groupId>taglibs</groupId>
+            <artifactId>standard</artifactId>
+            <version>1.1.2</version>
         </dependency>
         <dependency>
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
             <version>1.6</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet.jsp</groupId>
-            <artifactId>jsp-api</artifactId>
-            <version>2.1</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>commons-codec</groupId>

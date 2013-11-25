@@ -52,8 +52,7 @@ function receiveJmsMessage() {
     }
     $.ajax({
         type: 'post',
-        url: 'receive',
-        data: ({receiveConfigurationId : jmsConfigurationId}),
+        url: window.location.pathname +'/receive/get',
         success: function(response) {
             var htmlElement = $('#receivedXml');
             var xmlBody = '';
@@ -90,9 +89,10 @@ function sendMessage() {
             channel : $('#senderChannel').val(),
             managerName : $('#senderQueueManagerName').val(),
             destinationName : $('#senderDestinationName').val(),
+            correlationId : $('#senderCorrelationId').val(),
             isTopic : $('#senderIsTopic').val(),
             xmlString : xml}),
-        url: 'send',
+        url: window.location.pathname +'/send',
         success: function(response) {
             $('#sendResult').text(response.messageBody).attr('hidden',false);
             $('#sendButton').attr('style','display: block');
@@ -117,4 +117,46 @@ function stopReceivingMessages() {
     $('#start').attr('style','display: block');
     $('#stop').attr('style','display: none');
 }
+
+function startService() {
+    $.ajax({
+        type: "post",
+        data: ({host : $('#receiverHost').val(),
+            port : $('#receiverPort').val(),
+            channel : $('#receiverChannel').val(),
+            managerName : $('#receiverQueueManagerName').val(),
+            destinationName : $('#receiverDestinationName').val(),
+            correlationId : $('#receiverCorrelationId').val(),
+            isTopic : $('#receiverIsTopic').val()}),
+        url: window.location.pathname +'/receive/start',
+        success: function(response) {
+              setTimeout(startReceivingMessages(),3000);
+        },
+        error: function() {
+            alert('Error while request...');
+        }
+    })
+}
+function stopService() {
+    stopReceivingMessages();
+    $.ajax({
+        type: "post",
+        url: window.location.pathname +'/receive/stop',
+        success: function(response) {
+        },
+        error: function() {
+            alert('Error while request...');
+        }
+    })
+}
+$(function() {
+    $('#selection').accordion({
+        header: "h2",
+        collapsible: true
+    });
+
+});
+//$(document).ready(function() {
+//    $('#fileupload').attr('data-url',window.location.pathname +'/upload');
+//});
 
