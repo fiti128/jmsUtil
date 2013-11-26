@@ -12,12 +12,12 @@ import ru.sberbank.jms.util.domain.MqConfig;
 import javax.jms.*;
 
 /**
- * Created with IntelliJ IDEA.
- * User: SBT-Yanushevsky-SA
- * Date: 21.11.13
- * Time: 9:21
- * To change this template use File | Settings | File Templates.
- */
+* Created with IntelliJ IDEA.
+* User: SBT-Yanushevsky-SA
+* Date: 21.11.13
+* Time: 9:21
+* To change this template use File | Settings | File Templates.
+*/
 @Service ("websphereMq")
 public class ReceiveMessagesServiceWebsphereMQImpl implements ReceiveMessageService {
     private static String FORMAT_FILTER = "JMSCorrelationID = '%s'";

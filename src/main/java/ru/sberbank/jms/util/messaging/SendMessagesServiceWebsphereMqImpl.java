@@ -11,12 +11,12 @@ import javax.jms.*;
 
 
 /**
- * Created with IntelliJ IDEA.
- * User: SBT-Yanushevsky-SA
- * Date: 22.11.13
- * Time: 9:34
- * To change this template use File | Settings | File Templates.
- */
+* Created with IntelliJ IDEA.
+* User: SBT-Yanushevsky-SA
+* Date: 22.11.13
+* Time: 9:34
+* To change this template use File | Settings | File Templates.
+*/
 @Service("wmqSender")
 public class SendMessagesServiceWebsphereMqImpl implements SendMessagesService {
     public static  JmsConfiguration defaultConfig;
