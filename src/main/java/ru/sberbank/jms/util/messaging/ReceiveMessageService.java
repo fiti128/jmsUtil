@@ -1,6 +1,5 @@
 package ru.sberbank.jms.util.messaging;
 
-import ru.sberbank.jms.util.domain.JmsConfiguration;
 import ru.sberbank.jms.util.domain.MqConfig;
 
 /**

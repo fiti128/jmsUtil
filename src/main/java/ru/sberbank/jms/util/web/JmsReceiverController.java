@@ -7,12 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import ru.sberbank.jms.util.domain.JmsConfiguration;
 import ru.sberbank.jms.util.domain.JmsMessage;
 import ru.sberbank.jms.util.domain.MqConfig;
 import ru.sberbank.jms.util.messaging.ReceiveMessageService;
 import ru.sberbank.jms.util.messaging.ReceiveMessagesServiceWebsphereMQImpl;
-import ru.sberbank.jms.util.messaging.SendMessagesServiceWebsphereMqImpl;
 import ru.sberbank.jms.util.services.MessageStorageService;
 
 import java.util.ArrayList;

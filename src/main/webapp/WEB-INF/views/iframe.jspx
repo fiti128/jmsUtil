@@ -1,6 +1,8 @@
 <jsp:root xmlns:c="http://java.sun.com/jsp/jstl/core"  xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:fn="http://java.sun.com/jsp/jstl/functions"  xmlns:spring="http://www.springframework.org/tags" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
   <jsp:directive.page contentType="text/html;charset=UTF-8" />
   <jsp:output omit-xml-declaration="yes" />
+    <input type="button" class="btn btn-warning pull-right" value="Обновить UID" onclick="updateUid()"/>
+    <p id="updateResult" style="display:none"> </p>
   <pre id="xmlId">
       ${fn:escapeXml(result.xmlText)}
   </pre>

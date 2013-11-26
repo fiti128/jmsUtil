@@ -11,7 +11,6 @@ import ru.sberbank.jms.util.domain.JmsConfiguration;
 import ru.sberbank.jms.util.domain.JmsMessage;
 import ru.sberbank.jms.util.domain.MqConfig;
 import ru.sberbank.jms.util.messaging.SendMessagesService;
-import ru.sberbank.jms.util.messaging.SendMessagesServiceActiveMqImpl;
 import ru.sberbank.jms.util.messaging.SendMessagesServiceWebsphereMqImpl;
 
 

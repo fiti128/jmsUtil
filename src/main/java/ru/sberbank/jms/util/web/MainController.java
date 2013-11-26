@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,7 +21,6 @@ import ru.sberbank.jms.util.messaging.ReceiveMessagesServiceWebsphereMQImpl;
 import ru.sberbank.jms.util.messaging.SendMessagesServiceWebsphereMqImpl;
 import ru.sberbank.jms.util.xml.UpdateUidService;
 
-import javax.servlet.http.HttpServletRequest;
 
 
 /**
@@ -59,6 +56,14 @@ public class MainController {
         uiModel.addAttribute("xml",xmlMessage);
         return "index";
     }
+    @RequestMapping(value="/updateUid" ,method = RequestMethod.POST)
+    @ResponseBody
+    XmlMessage  updateUid(@RequestParam(required = true) String xml)  {
+        String str = updateUidService.updateUid(xml);
+        xmlMessage = new XmlMessage();
+        xmlMessage.setXmlText(str);
+        return xmlMessage;
+    }
 
     @RequestMapping(value="/" ,method = RequestMethod.POST)
    public String upload(MultipartHttpServletRequest request,Model uiModel, @ModelAttribute("fileUpload") FileUpload fileUpload) throws IOException {
@@ -67,24 +72,13 @@ public class MainController {
         if(mf!=null) {
             System.out.println(mf.getOriginalFilename());
         }
-        JmsConfiguration jmsConfiguration = new JmsConfiguration();
-        jmsConfiguration.setUrl(ERROR_UPLOAD_STRING_NOT_XML);
-        //0. notice, we have used MultipartHttpServletRequest
-//        try {
-//            List<FileItem> list = uploader.parseRequest(request);
-//            for (FileItem fileItem : list) {
-//                System.out.println(fileItem.getFieldName());
-//            }
-//        } catch (FileUploadException e) {
-//            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-//        }
+        xmlMessage = new XmlMessage();
+        xmlMessage.setXmlText(ERROR_UPLOAD_STRING_NOT_XML);
 
-//        1. get the files from the request object
         Iterator<String> itr =  request.getFileNames();
 
         MultipartFile mpf = request.getFile(itr.next());
         String fileName = mpf.getOriginalFilename();
-        System.out.println("Multipart " +fileName);
 
 
         if (fileName.matches(UPLOAD_EXTENSION_PATTERN)) {
@@ -98,7 +92,6 @@ public class MainController {
             str = updateUidService.updateUid(str);
             xmlMessage = new XmlMessage();
             xmlMessage.setXmlText(str);
-            jmsConfiguration.setUrl(str);
         }
             uiModel.addAttribute("result",xmlMessage);
 
@@ -111,13 +104,6 @@ public class MainController {
     JmsConfiguration getJmsConfigurationList(@RequestParam(required = false) String name) {
 
         JmsConfiguration jmsConfiguration = new JmsConfiguration();
-//        List<JmsConfiguration> jmsConfigurationList = JmsConfiguration.findAllOptions();
-//        for (JmsConfiguration config : jmsConfigurationList) {
-//              if (config.getConfigurationName().equals(name)) {
-//                  jmsConfiguration = config;
-//              }
-//        }
-
 
         return jmsConfiguration;
     }

@@ -56,7 +56,8 @@ function receiveJmsMessage() {
 }
 function sendMessage() {
     $('#sendButton').attr('style','display: none');
-    var xml = $('#result').text();
+    var iframeElement = document.getElementById('my_iframe');
+    var xml = iframeElement.contentWindow.document.getElementById('xmlId').innerText;;
     $.ajax({
         type: "post",
         data: ({host : $('#senderHost').val(),
@@ -135,3 +136,19 @@ $(function() {
     });
 
 });
+function updateUid() {
+    $.ajax({
+        type: 'post',
+        data: ({xml : $('#xmlId').text()}),
+        url: window.location.pathname +'/updateUid',
+        success: function(response) {
+            var newXml = response.xmlText;
+            newXml.replace(/\r\n/g,'\n');
+            $('#xmlId').text(newXml);
+            $('#updateResult').attr('style','display: block');
+        },
+        error: function() {
+            alert('Error while request...');
+        }
+    })
+}

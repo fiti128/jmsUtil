@@ -33,7 +33,8 @@ public class UpdateUidServiceImpl implements UpdateUidService {
     public String updateUid(String xml) {
         try {
         SAXBuilder builder = new SAXBuilder();
-
+        xml = xml.trim();
+            System.out.println(xml);
         Document doc = (Document) builder.build(new ByteArrayInputStream(xml.getBytes(ENCODING)));
         Element rootNode = doc.getRootElement();
 

@@ -2,7 +2,6 @@ package ru.sberbank.jms.util.messaging;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import ru.sberbank.jms.util.domain.JmsMessage;
 import ru.sberbank.jms.util.services.MessageStorageService;
 
 import javax.jms.Message;
