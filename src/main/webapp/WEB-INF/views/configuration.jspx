@@ -18,45 +18,49 @@
 
     <br/>
     <div id="selection">
-        <h2>Конфигурация <span class="caret"> </span></h2>
+    <h3>Конфигурация  </h3>
         <div>
-            <div class="form">
-                    <div class="col-md-6">
-                        <h2>Отправка</h2>
-                        <div class="form-group">
-                            <label for="senderHost" class="control-label">IP адресс</label>
-                            <input type="text" id="senderHost" class="form-control" value="${senderConfig.host}"/>
-                        </div>
-                        <div class="form-group">
-                            <label for="senderPort" class="control-label">Порт</label>
-                            <input type="number" id="senderPort" class="form-control" value="${senderConfig.port}"/>
-                        </div>
-                        <div class="form-group">
-                            <label for="senderChannel" class="control-label">Канал</label>
-                            <input id="senderChannel" class="form-control" value="${senderConfig.channel}"/>
-                        </div>
-                        <div class="form-group">
-                            <label for="senderQueueManagerName" class="control-label">Имя менеджера</label>
-                            <input id="senderQueueManagerName" class="form-control" value="${senderConfig.queueManagerName}"/>
-                        </div>
-                        <div class="form-group">
-                            <label for="senderDestinationName" class="control-label">Название очереди</label>
-                            <input id="senderDestinationName" class="form-control" value="${senderConfig.destinationName}"/>
-                        </div>
-                        <div class="form-group">
-                            <label for="senderCorrelationId" class="control-label">Корреляционный идентификатор</label>
-                            <input id="senderCorrelationId" class="form-control" value="${senderConfig.correlationId}"/>
-                        </div>
-                        <div class="form-group">
-                            <label for="senderIsTopic" class="control-label">Тип очереди</label>
-                            <select id="senderIsTopic" class="form-control">
-                                    <option value="false">QUEUE</option>
-                                    <option value="true">TOPIC</option>
-                            </select>
-                        </div>
 
+
+
+            <div class="form">
+                    <div class="col-xs-6">
+                        <h2>Отправка</h2>
+                        <div id="sendConfigurationId">
+                            <div class="form-group">
+                                <label for="senderHost" class="control-label">IP адресс</label>
+                                <input type="text" id="senderHost" class="form-control" value="${senderConfig.host}"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="senderPort" class="control-label">Порт</label>
+                                <input type="number" id="senderPort" class="form-control" value="${senderConfig.port}"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="senderChannel" class="control-label">Канал</label>
+                                <input id="senderChannel" class="form-control" value="${senderConfig.channel}"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="senderQueueManagerName" class="control-label">Имя менеджера</label>
+                                <input id="senderQueueManagerName" class="form-control" value="${senderConfig.queueManagerName}"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="senderDestinationName" class="control-label">Название очереди</label>
+                                <input id="senderDestinationName" class="form-control" value="${senderConfig.destinationName}"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="senderCorrelationId" class="control-label">Корреляционный идентификатор</label>
+                                <input id="senderCorrelationId" class="form-control" value="${senderConfig.correlationId}"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="senderIsTopic" class="control-label">Тип очереди</label>
+                                <select id="senderIsTopic" class="form-control">
+                                        <option value="false">QUEUE</option>
+                                        <option value="true">TOPIC</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
-                        <div class="col-md-6">
+                        <div class="col-xs-6">
                             <h2>Прием</h2>
                             <div class="form-group">
                                 <label for="receiverHost" class="control-label">IP адресс</label>
@@ -97,7 +101,6 @@
                         <p id="configurationId"  hidden="true"> </p>
              </div>
         </div>
-
     </div>
 
 

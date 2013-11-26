@@ -5,38 +5,13 @@
  * Time: 16:18
  * To change this template use File | Settings | File Templates.
  */
-function madeAjaxCall(thisId,url) {
-    var confValue = $('#'+thisId+' option:selected').val();
-    console.info(confValue);
-    $.ajax({
-        type: "post",
-        data: ({name : confValue}),
-        url: url,
-        success: function(response) {
-            console.info(response.configurationName);
-            $('#configurationNameId').text(response.configurationName);
-            $('#urlId').text(response.url);
-            $('#delayId').text(response.delay);
-            $('#queueId').text(response.queueName);
-            $('#queueReceiveId').text(response.queueNameReceive);
-
-        },
-        error: function() {
-            alert('Error while request...');
-        }
-    })
+function redirect() {
+    document.getElementById('myForm').target = 'my_iframe';
+    document.getElementById('myForm').submit();
 }
 
-$(function () {
-    $('#fileupload').fileupload({
-        dataType: 'json',
-        success: function(response) {
-            var result = $('#result');
-            result.text(response.url);
-            result.attr('hidden',false);
-        }
-});
-});
+
+
 var interval = 5000;
 function receiveJmsMessage() {
     console.info('In receive. Interval is' + interval);
@@ -109,8 +84,7 @@ function startReceivingMessages() {
     receiveJmsMessage();
     console.info(interval);
     refreshIntervalId =  setInterval('receiveJmsMessage()',interval);
-    $('#start').attr('style','display: none');
-    $('#stop').attr('style','display: block');
+
 }
 function stopReceivingMessages() {
     clearInterval(refreshIntervalId);
@@ -130,7 +104,11 @@ function startService() {
             isTopic : $('#receiverIsTopic').val()}),
         url: window.location.pathname +'/receive/start',
         success: function(response) {
-              setTimeout(startReceivingMessages(),3000);
+            $('#start').attr('style','display: none');
+            $('#stop').attr('style','display: block');
+              window.setTimeout(function() {
+                  startReceivingMessages();
+              },3000);
         },
         error: function() {
             alert('Error while request...');
@@ -149,14 +127,11 @@ function stopService() {
         }
     })
 }
-//$(function() {
-//    $('#selection').accordion({
-//        header: "h2",
-//        collapsible: true
-//    });
-//
-//});
-//$(document).ready(function() {
-//    $('#fileupload').attr('data-url',window.location.pathname +'/upload');
-//});
 
+$(function() {
+    $('#selection').accordion({
+        header: "h3",
+        collapsible: true
+    });
+
+});

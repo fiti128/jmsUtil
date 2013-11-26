@@ -5,15 +5,19 @@
 
 <tiles-definitions>
   <definition name="index" extends="default">
+      <put-attribute name="header" value="/WEB-INF/views/header.jspx" />
      <put-attribute name="configuration" value="/WEB-INF/views/configuration.jspx" />
      <put-attribute name="body-right" value="/WEB-INF/views/body-right.jspx" />
-     <put-attribute name="body-left" value="/WEB-INF/views/body-left.jspx" />
+     <put-attribute name="body-left" value="/WEB-INF/views/body-left-new.jspx" />
 
   </definition>
 
   <definition name="dataAccessFailure" extends="public">
     <put-attribute name="body" value="/WEB-INF/views/dataAccessFailure.jspx" />
   </definition>
+   <definition name="iframe" extends="default">
+        <put-attribute name="body" value="/WEB-INF/views/iframe.jspx" />
+   </definition>
 
   <definition name="resourceNotFound" extends="public">
     <put-attribute name="body" value="/WEB-INF/views/resourceNotFound.jspx" />
