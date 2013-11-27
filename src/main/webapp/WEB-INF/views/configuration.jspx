@@ -18,83 +18,47 @@
 
     <br/>
     <div id="selection">
-    <h3>Конфигурация  </h3>
+        <h3 class="modal-header">Конфигурация  </h3>
         <div>
-
-
 
             <div class="form">
                     <div class="col-xs-6">
                         <h2>Отправка</h2>
                         <div id="sendConfigurationId">
                             <div class="form-group">
-                                <label for="senderHost" class="control-label">IP адресс</label>
-                                <input type="text" id="senderHost" class="form-control" value="${senderConfig.host}"/>
+                                <label for="senderHost" class="control-label">JNDI имя фабрики соединений</label>
+                                <input type="text" id="senderHost" class="form-control" value="${senderConfig.connectionFactoryName}"/>
                             </div>
                             <div class="form-group">
-                                <label for="senderPort" class="control-label">Порт</label>
-                                <input type="number" id="senderPort" class="form-control" value="${senderConfig.port}"/>
+                                <label for="senderPort" class="control-label">JNDI имя очереди</label>
+                                <input id="senderPort" class="form-control" value="${senderConfig.queueName}"/>
                             </div>
-                            <div class="form-group">
-                                <label for="senderChannel" class="control-label">Канал</label>
-                                <input id="senderChannel" class="form-control" value="${senderConfig.channel}"/>
-                            </div>
-                            <div class="form-group">
-                                <label for="senderQueueManagerName" class="control-label">Имя менеджера</label>
-                                <input id="senderQueueManagerName" class="form-control" value="${senderConfig.queueManagerName}"/>
-                            </div>
-                            <div class="form-group">
-                                <label for="senderDestinationName" class="control-label">Название очереди</label>
-                                <input id="senderDestinationName" class="form-control" value="${senderConfig.destinationName}"/>
-                            </div>
+
                             <div class="form-group">
                                 <label for="senderCorrelationId" class="control-label">Корреляционный идентификатор</label>
                                 <input id="senderCorrelationId" class="form-control" value="${senderConfig.correlationId}"/>
                             </div>
-                            <div class="form-group">
-                                <label for="senderIsTopic" class="control-label">Тип очереди</label>
-                                <select id="senderIsTopic" class="form-control">
-                                        <option value="false">QUEUE</option>
-                                        <option value="true">TOPIC</option>
-                                </select>
-                            </div>
+
                         </div>
                     </div>
                         <div class="col-xs-6">
                             <h2>Прием</h2>
                             <div class="form-group">
-                                <label for="receiverHost" class="control-label">IP адресс</label>
-                                <input type="text" id="receiverHost" class="form-control" value="${receiverConfig.host}"/>
+                                <label for="receiverHost" class="control-label">JNDI имя фабрики соединений</label>
+                                <input type="text" id="receiverHost" class="form-control" value="${receiverConfig.connectionFactoryName}"/>
                             </div>
                             <div class="form-group">
-                                <label for="receiverPort" class="control-label">Порт</label>
-                                <input type="number" id="receiverPort" class="form-control" value="${receiverConfig.port}"/>
+                                <label for="receiverPort" class="control-label">JNDI имя очереди</label>
+                                <input id="receiverPort" class="form-control" value="${receiverConfig.queueName}"/>
                             </div>
-                            <div class="form-group">
-                                <label for="receiverChannel" class="control-label">Канал</label>
-                                <input id="receiverChannel" class="form-control" value="${receiverConfig.channel}"/>
-                            </div>
-                            <div class="form-group">
-                                <label for="receiverQueueManagerName" class="control-label">Имя менеджера</label>
-                                <input id="receiverQueueManagerName" class="form-control" value="${receiverConfig.queueManagerName}"/>
-                            </div>
-                            <div class="form-group">
-                                <label for="receiverDestinationName" class="control-label">Название очереди</label>
-                                <input id="receiverDestinationName" class="form-control" value="${receiverConfig.destinationName}"/>
-                            </div>
+
                             <div class="form-group">
                                 <label for="receiverCorrelationId" class="control-label">Корреляционный идентификатор</label>
                                 <input id="receiverCorrelationId" class="form-control" value="${receiverConfig.correlationId}"/>
                             </div>
+
                             <div class="form-group">
-                                <label for="receiverIsTopic" class="control-label">Тип очереди</label>
-                                <select id="receiverIsTopic" class="form-control">
-                                    <option value="false">QUEUE</option>
-                                    <option value="true">TOPIC</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="delayId" class="control-label">Задержка в секундах</label>
+                                <label for="delayId" class="control-label">Ожидание ответа в секундах</label>
                                 <input id="delayId" type="number" min="5" class="form-control" value="10"/>
                             </div>
                         </div>

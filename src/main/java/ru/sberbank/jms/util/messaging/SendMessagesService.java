@@ -10,5 +10,11 @@ import ru.sberbank.jms.util.domain.MqConfig;
  * To change this template use File | Settings | File Templates.
  */
 public interface SendMessagesService {
+
+    String CORRELATION_ID= "SBERBANK.MINSK";
+    String CONNECTION_FACTORY_NAME="jms/erib/way4u/InputQCF";
+    String QUEUE_NAME="jms/erib/way4u/OutputQueue";
+
+
     boolean sendMessage(String xmlString, MqConfig config);
 }

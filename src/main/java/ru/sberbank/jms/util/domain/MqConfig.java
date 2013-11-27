@@ -13,60 +13,25 @@ import java.io.Serializable;
  * To change this template use File | Settings | File Templates.
  */
 public class MqConfig implements Serializable {
-    private String host;
-    private int port;
-    private String channel;
-    private String queueManagerName;
-    private String destinationName;
-    private boolean IS_TOPIC;
+    private String connectionFactoryName;
+    private String queueName;
     private String correlationId;
+    private long timeout;
 
-    public String getHost() {
-        return host;
+    public String getConnectionFactoryName() {
+        return connectionFactoryName;
     }
 
-    public void setHost(String host) {
-        this.host = host;
+    public void setConnectionFactoryName(String connectionFactoryName) {
+        this.connectionFactoryName = connectionFactoryName;
     }
 
-    public int getPort() {
-        return port;
+    public String getQueueName() {
+        return queueName;
     }
 
-    public void setPort(int port) {
-        this.port = port;
-    }
-
-    public String getChannel() {
-        return channel;
-    }
-
-    public void setChannel(String channel) {
-        this.channel = channel;
-    }
-
-    public String getQueueManagerName() {
-        return queueManagerName;
-    }
-
-    public void setQueueManagerName(String queueManagerName) {
-        this.queueManagerName = queueManagerName;
-    }
-
-    public String getDestinationName() {
-        return destinationName;
-    }
-
-    public void setDestinationName(String destinationName) {
-        this.destinationName = destinationName;
-    }
-
-    public boolean isIS_TOPIC() {
-        return IS_TOPIC;
-    }
-
-    public void setIS_TOPIC(boolean IS_TOPIC) {
-        this.IS_TOPIC = IS_TOPIC;
+    public void setQueueName(String queueName) {
+        this.queueName = queueName;
     }
 
     public String getCorrelationId() {
@@ -75,6 +40,14 @@ public class MqConfig implements Serializable {
 
     public void setCorrelationId(String correlationId) {
         this.correlationId = correlationId;
+    }
+
+    public long getTimeout() {
+        return timeout;
+    }
+
+    public void setTimeout(long timeout) {
+        this.timeout = timeout;
     }
 
     @Override

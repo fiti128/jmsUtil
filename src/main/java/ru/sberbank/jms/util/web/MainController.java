@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import ru.sberbank.jms.util.domain.JmsConfiguration;
 import ru.sberbank.jms.util.domain.XmlMessage;
 import ru.sberbank.jms.util.messaging.ReceiveMessagesServiceWebsphereMQImpl;
+import ru.sberbank.jms.util.messaging.SendMessagesService;
 import ru.sberbank.jms.util.messaging.SendMessagesServiceWebsphereMqImpl;
 import ru.sberbank.jms.util.xml.UpdateUidService;
 

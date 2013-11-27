@@ -1,13 +1,16 @@
 package ru.sberbank.jms.util.messaging;
 
-import com.ibm.msg.client.jms.JmsConnectionFactory;
-import com.ibm.msg.client.jms.JmsFactoryFactory;
-import com.ibm.msg.client.wmq.WMQConstants;
+
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 import ru.sberbank.jms.util.domain.JmsConfiguration;
 import ru.sberbank.jms.util.domain.MqConfig;
 
 import javax.jms.*;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import java.util.Hashtable;
 
 
 /**
@@ -19,87 +22,63 @@ import javax.jms.*;
 */
 @Service("wmqSender")
 public class SendMessagesServiceWebsphereMqImpl implements SendMessagesService {
-    public static  JmsConfiguration defaultConfig;
-    public static String HOST = "10.71.0.34";
-    public static int PORT = 1415;
-    public static String CHANNEL = "SYSTEM.DEF.SVRCONN";
-    public static String QUEUE_MANAGER_NAME = "JMS01.DEMO";
-    public static String CORRELATION_ID= "SBERBANK.MINSK";
-    public static String DESTINATION_NAME = "JMS.LQ";
-    public static boolean IS_TOPIC = false;
     public static MqConfig DEFAULT_MQ_CONFIG;
-
     static {
-        defaultConfig = new JmsConfiguration();
-        defaultConfig.setUrl("vm://localhost:61616");
-        defaultConfig.setQueueNameReceive("jms.topic.JmsUtil");
 
         DEFAULT_MQ_CONFIG = new MqConfig();
-        DEFAULT_MQ_CONFIG.setHost(HOST);
-        DEFAULT_MQ_CONFIG.setPort(PORT);
-        DEFAULT_MQ_CONFIG.setChannel(CHANNEL);
-        DEFAULT_MQ_CONFIG.setQueueManagerName(QUEUE_MANAGER_NAME);
-        DEFAULT_MQ_CONFIG.setDestinationName(DESTINATION_NAME);
-        DEFAULT_MQ_CONFIG.setIS_TOPIC(IS_TOPIC);
+        DEFAULT_MQ_CONFIG.setQueueName(QUEUE_NAME);
+        DEFAULT_MQ_CONFIG.setConnectionFactoryName(CONNECTION_FACTORY_NAME);
         DEFAULT_MQ_CONFIG.setCorrelationId(CORRELATION_ID);
     }
     public boolean sendMessage(String xmlString, MqConfig mqConfig) {
         if (mqConfig==null) {
             mqConfig = DEFAULT_MQ_CONFIG;
         }
-
-        String host = mqConfig.getHost();
-        int port = mqConfig.getPort();
-        String channel = CHANNEL;
-        String queueManagerName = mqConfig.getQueueManagerName();
-        String destinationName = mqConfig.getDestinationName();
-        boolean isTopic = mqConfig.isIS_TOPIC();
+        String connectionFactoryName = mqConfig.getConnectionFactoryName();
+        String queueName = mqConfig.getQueueName();
         String correlationId = mqConfig.getCorrelationId();
 
         boolean result = true;
-        // Variables
+
+        MessageProducer producer = null;
         Connection connection = null;
         Session session = null;
-        Destination destination = null;
-        MessageProducer producer = null;
-
         try {
-            // Create a connection factory
-            JmsFactoryFactory ff = JmsFactoryFactory.getInstance(WMQConstants.WMQ_PROVIDER);
-            JmsConnectionFactory cf = ff.createConnectionFactory();
-
-            // Set the properties
-            cf.setStringProperty(WMQConstants.WMQ_HOST_NAME, host);
-            cf.setIntProperty(WMQConstants.WMQ_PORT, port);
-            cf.setStringProperty(WMQConstants.WMQ_CHANNEL, channel);
-            cf.setIntProperty(WMQConstants.WMQ_CONNECTION_MODE, WMQConstants.WMQ_CM_CLIENT);
-            cf.setStringProperty(WMQConstants.WMQ_QUEUE_MANAGER, queueManagerName);
-
-            // Create JMS objects
-            connection = cf.createConnection();
-            session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-            if (isTopic) {
-                destination = session.createTopic(destinationName);
-            }
-            else {
-                destination = session.createQueue(destinationName);
-            }
-            producer = session.createProducer(destination);
-            TextMessage message = session.createTextMessage(xmlString);
-            message.setJMSCorrelationID(correlationId);
-
-            // Start the connection
+            System.out.println("getting context");
+            Context ctx = new InitialContext(new Hashtable());
+            System.out.println("getting factory" + connectionFactoryName);
+            ConnectionFactory qcf = (ConnectionFactory) ctx
+                    .lookup(connectionFactoryName);
+            System.out.println("getting queue from jndi " + queueName);
+            Queue q = (Queue) ctx.lookup(queueName);
+            System.out.println("getting connection");
+            connection = qcf.createConnection();
             connection.start();
-
-            // And, send the message
-            producer.send(message);
-            System.out.println("Sent message:\n" + message);
+            session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+            producer = session.createProducer(q);
+            TextMessage msg = session.createTextMessage();
+            msg.setText(xmlString);
+               if(correlationId.length() > 0 ) {
+                   msg.setJMSCorrelationID(correlationId);
+                   System.out.println("correlation Id set to " +correlationId);
+               }
+            producer.send(msg);
+            System.out.println("Message sent:\nid=" + msg.getJMSMessageID());
 
         }
         catch (JMSException jmsex) {
+            System.out.println("SEND: JMSException" + jmsex.getMessage());
             result = false;
-        }
-        finally {
+            jmsex.printStackTrace();
+            Logger.getLogger(this.getClass()).error("Error while creating jms connection",jmsex);
+            throw new RuntimeException(jmsex);
+        } catch (NamingException e) {
+            System.out.println("SEND: NamingException" + e.getMessage());
+            result = false;
+            e.printStackTrace();
+            Logger.getLogger(this.getClass()).error("Error while retrieving jndi ",e);
+            throw new RuntimeException(e);
+        } finally {
             if (producer != null) {
                 try {
                     producer.close();

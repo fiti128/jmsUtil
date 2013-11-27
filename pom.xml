@@ -59,22 +59,19 @@
             <groupId>com.ibm.mq</groupId>
             <artifactId>mqjms</artifactId>
             <version>6.1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.ibm.mq</groupId>
-            <artifactId>mq.client</artifactId>
-            <version>7.0</version>
-            <!--<scope>provided</scope>-->
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.ibm.mq</groupId>
             <artifactId>mq</artifactId>
             <version>6.1</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.ibm.mq</groupId>
             <artifactId>dhbcore</artifactId>
             <version>6.1</version>
+            <scope>provided</scope>
         </dependency>
         <!-- General dependencies for standard applications -->
         <dependency>

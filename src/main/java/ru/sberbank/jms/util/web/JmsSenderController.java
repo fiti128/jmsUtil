@@ -30,25 +30,16 @@ public class JmsSenderController {
 
     @RequestMapping( method = RequestMethod.POST)
     public @ResponseBody
-    JmsMessage getJmsConfigurationList(@RequestParam(required = true) String host,
-                                       @RequestParam(required = true) int port,
-                                       @RequestParam(required = true) String channel,
-                                       @RequestParam(required = true) String managerName,
-                                       @RequestParam(required = true) String destinationName,
+    JmsMessage getJmsConfigurationList(@RequestParam(required = true) String factoryName,
                                        @RequestParam(required = true) String correlationId,
-                                       @RequestParam(required = true) boolean isTopic,
+                                       @RequestParam(required = true) String queueName,
                                        @RequestParam(required = true) String xmlString) {
 
         MqConfig mqConfig = new MqConfig();
-        mqConfig.setHost(host);
-        mqConfig.setPort(port);
-        mqConfig.setChannel(channel);
-        mqConfig.setQueueManagerName(managerName);
-        mqConfig.setDestinationName(destinationName);
-        mqConfig.setIS_TOPIC(isTopic);
+        mqConfig.setConnectionFactoryName(factoryName);
+        mqConfig.setQueueName(queueName);
         mqConfig.setCorrelationId(correlationId);
 
-        System.out.println(mqConfig);
         SendMessagesServiceWebsphereMqImpl.DEFAULT_MQ_CONFIG = mqConfig;
 
         if (xmlString == null || xmlString.trim().length() < 1) {

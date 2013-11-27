@@ -60,13 +60,9 @@ function sendMessage() {
     var xml = iframeElement.contentWindow.document.getElementById('xmlId').innerText;;
     $.ajax({
         type: "post",
-        data: ({host : $('#senderHost').val(),
-            port : $('#senderPort').val(),
-            channel : $('#senderChannel').val(),
-            managerName : $('#senderQueueManagerName').val(),
-            destinationName : $('#senderDestinationName').val(),
+        data: ({factoryName : $('#senderHost').val(),
+            queueName : $('#senderPort').val(),
             correlationId : $('#senderCorrelationId').val(),
-            isTopic : $('#senderIsTopic').val(),
             xmlString : xml}),
         url: window.location.pathname +'/send',
         success: function(response) {
@@ -94,22 +90,22 @@ function stopReceivingMessages() {
 }
 
 function startService() {
+            $('#start').attr('style','display: none');
     $.ajax({
         type: "post",
-        data: ({host : $('#receiverHost').val(),
-            port : $('#receiverPort').val(),
-            channel : $('#receiverChannel').val(),
-            managerName : $('#receiverQueueManagerName').val(),
-            destinationName : $('#receiverDestinationName').val(),
+        data: ({factoryName : $('#receiverHost').val(),
+            queueName : $('#receiverPort').val(),
             correlationId : $('#receiverCorrelationId').val(),
-            isTopic : $('#receiverIsTopic').val()}),
+            timeout : $('#delayId').val()*1000}),
         url: window.location.pathname +'/receive/start',
         success: function(response) {
-            $('#start').attr('style','display: none');
-            $('#stop').attr('style','display: block');
-              window.setTimeout(function() {
-                  startReceivingMessages();
-              },3000);
+            var xml = response.messageBody;
+            $('#start').attr('style','display: block');
+            if (xml.length > 1) {
+                 $('#receivedXml').text(xml).attr('hidden',false);
+            }
+
+
         },
         error: function() {
             alert('Error while request...');
@@ -132,7 +128,8 @@ function stopService() {
 $(function() {
     $('#selection').accordion({
         header: "h3",
-        collapsible: true
+        collapsible: true,
+        active:false
     });
 
 });

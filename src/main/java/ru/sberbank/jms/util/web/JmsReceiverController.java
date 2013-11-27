@@ -31,50 +31,22 @@ public class JmsReceiverController {
     @Qualifier(value = "websphereMq")
     private transient ReceiveMessageService receiveMessageService;
 
-    @Autowired
-    private transient MessageStorageService messageStorageService;
-
     @RequestMapping(value = "/start",method = RequestMethod.POST)
     public @ResponseBody
-    JmsMessage getJmsConfigurationList(@RequestParam(required = true) String host,
-                                             @RequestParam(required = true) int port,
-                                             @RequestParam(required = true) String channel,
-                                             @RequestParam(required = true) String managerName,
-                                             @RequestParam(required = true) String destinationName,
+    JmsMessage getJmsConfigurationList(@RequestParam(required = true) String factoryName,
                                              @RequestParam(required = true) String correlationId,
-                                             @RequestParam(required = true) boolean isTopic) {
+                                             @RequestParam(required = true) long timeout,
+                                             @RequestParam(required = true) String queueName) {
 
         MqConfig mqConfig = new MqConfig();
-        mqConfig.setHost(host);
-        mqConfig.setPort(port);
-        mqConfig.setChannel(channel);
-        mqConfig.setQueueManagerName(managerName);
-        mqConfig.setDestinationName(destinationName);
-        mqConfig.setIS_TOPIC(isTopic);
+        mqConfig.setConnectionFactoryName(factoryName);
+        mqConfig.setTimeout(timeout);
+        mqConfig.setQueueName(queueName);
         mqConfig.setCorrelationId(correlationId);
 
         ReceiveMessagesServiceWebsphereMQImpl.DEFAULT_MQ_CONFIG = mqConfig;
 
-        receiveMessageService.startConnection(mqConfig);
-
-        return new JmsMessage();
+        return receiveMessageService.getMessages(mqConfig);
     }
 
-    @RequestMapping(value = "/stop",method = RequestMethod.POST)
-    public @ResponseBody
-    JmsMessage stopConnection() {
-        receiveMessageService.stopConnection();
-                return new JmsMessage();
-    }
-
-    @RequestMapping(value = "/get",method = RequestMethod.POST)
-    public @ResponseBody
-    List<JmsMessage> getMessages() {
-        List<JmsMessage> messageList = new ArrayList<JmsMessage>();
-        JmsMessage jmsMessage = new JmsMessage();
-        jmsMessage.setMessageBody(messageStorageService.getMessagesFromStorage());
-        messageStorageService.clearStorage();
-        messageList.add(jmsMessage);
-        return messageList;
-    }
 }

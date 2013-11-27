@@ -54,7 +54,7 @@
 
 
 
-
+               <tiles:insertAttribute name="configuration" ignore="true" />
                 <div class="row">
                     <div class="col-xs-6">
 
@@ -67,7 +67,7 @@
                 </div>
 
                 <tiles:insertAttribute name="body" ignore="true" />
-               <tiles:insertAttribute name="configuration" ignore="true" />
+
 		    	<tiles:insertAttribute name="footer" ignore="true"/>
 		</div>
 	</body>
