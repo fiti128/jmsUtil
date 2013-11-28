@@ -12,6 +12,7 @@ import javax.jms.*;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import java.io.UnsupportedEncodingException;
 import java.util.Hashtable;
 
 /**
@@ -70,14 +71,18 @@ public class ReceiveMessagesServiceWebsphereMQImpl implements ReceiveMessageServ
 
             session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
             System.out.println("creating consumer. Correlation ID is " + correlationId);
-            consumer = correlationId.length() > 0 ? session.createConsumer(q,"JMSCorrelationID = '"+correlationId+"'"):session.createConsumer(q);
+            byte[] correlationIdasBytes = new byte[24];
+            correlationIdasBytes = correlationId.getBytes("UTF-8");
+            String selector = "JMSCorrelationID='ID:" + getHexString(correlationIdasBytes) + "'";
+            consumer = correlationId.length() > 0 ? session.createConsumer(q, selector):session.createConsumer(q);
+            System.out.println("Trying selector " + selector);
             Message message = consumer.receive(timeout);
             if (message != null) {
                 logger.debug("message received");
                 logger.debug("id=" + message.getJMSMessageID());
                 jmsMessage.setMessageBody(((TextMessage)message).getText());
             } else {
-                logger.debug("message not found or message not text message");
+                logger.error("Message was not fount or received not a textMessage");
             }
 
 
@@ -95,11 +100,27 @@ public class ReceiveMessagesServiceWebsphereMQImpl implements ReceiveMessageServ
             e1.printStackTrace();
             logger.error("Error while creating jms connection", e1);
             throw new RuntimeException(e1);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
 
         return jmsMessage;
     }
 
+    public static String getHexString(byte[] b){
+        StringBuilder sb = new StringBuilder();
+
+        for (int i=0; i < b.length; i++) {
+            sb.append(Integer.toString( ( b[i] & 0xff ) + 0x100, 16).substring( 1 ));
+        }
+        int length = 48 - sb.length();
+         for (int i = 0; i < length; i++) {
+            sb.append("0");
+        }
+        String result = sb.toString();
+        System.out.println("hexString " +result);
+        return result;
+    }
     public synchronized boolean startConnection(MqConfig mqConfig) {
        if (connected) return true;
         mqConfig = DEFAULT_MQ_CONFIG;

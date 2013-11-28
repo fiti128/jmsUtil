@@ -13,7 +13,7 @@ import ru.sberbank.jms.util.domain.MqConfig;
 public interface ReceiveMessageService {
 
     String CORRELATION_ID= "SBERBANK.MINSK";
-    String CONNECTION_FACTORY_NAME="jms/erib/way4u/InputQCF";
+    String CONNECTION_FACTORY_NAME="jms/erib/way4u/OutputQCF";
     String QUEUE_NAME="jms/erib/way4u/OutputQueue";
 
     JmsMessage getMessages(MqConfig mqConfig);

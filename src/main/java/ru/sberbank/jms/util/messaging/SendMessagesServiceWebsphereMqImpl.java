@@ -10,6 +10,7 @@ import javax.jms.*;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import java.io.UnsupportedEncodingException;
 import java.util.Hashtable;
 
 
@@ -57,14 +58,22 @@ public class SendMessagesServiceWebsphereMqImpl implements SendMessagesService {
             session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
             producer = session.createProducer(q);
             TextMessage msg = session.createTextMessage();
+            byte [] correlationIdbytes = correlationId.getBytes("UTF-8");
             msg.setText(xmlString);
                if(correlationId.length() > 0 ) {
-                   msg.setJMSCorrelationID(correlationId);
-                   System.out.println("correlation Id set to " +correlationId);
-               }
+            msg.setJMSCorrelationID(correlationId);
             producer.send(msg);
+              msg.setJMSCorrelationIDAsBytes(correlationIdbytes);
+            System.out.println("correlation Id set to " +correlationId);
+            producer.send(msg);
+               }
             System.out.println("Message sent:\nid=" + msg.getJMSMessageID());
+            System.out.println("Send correlation id is" + msg.getJMSCorrelationID() +"\n");
+            byte[] bytes = msg.getJMSCorrelationID().getBytes();
+            for (byte aByte : correlationIdbytes) {
 
+                System.out.print(aByte);
+            }
         }
         catch (JMSException jmsex) {
             System.out.println("SEND: JMSException" + jmsex.getMessage());
@@ -78,6 +87,8 @@ public class SendMessagesServiceWebsphereMqImpl implements SendMessagesService {
             e.printStackTrace();
             Logger.getLogger(this.getClass()).error("Error while retrieving jndi ",e);
             throw new RuntimeException(e);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         } finally {
             if (producer != null) {
                 try {
