@@ -2,9 +2,12 @@
   <jsp:directive.page contentType="text/html;charset=UTF-8" />
   <jsp:output omit-xml-declaration="yes" />
     <input type="button" class="btn btn-warning pull-right" value="Обновить UID" onclick="updateUid()"/>
+      <textarea  class="form-control" rows="30" id="xmlId" cols="75%" >
+          ${fn:escapeXml(result.xmlText)}
+      </textarea>
     <p id="updateResult" style="display:none"> </p>
-  <pre id="xmlId">
-      ${fn:escapeXml(result.xmlText)}
-  </pre>
+
+
+
 </jsp:root>
 

@@ -44,7 +44,7 @@
 
             <!--<input type="button" value="Submit" onclick="redirect()"/>-->
             </form:form>
-                <iframe hidden="true" width="100%" height="500" id='my_iframe' name='my_iframe' src=""> _
+                <iframe scrolling="no" style="overflow: hidden" hidden="true" width="100%" height="600" id='my_iframe' name='my_iframe' src=""> _
 
                 </iframe>
 

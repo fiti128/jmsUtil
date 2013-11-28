@@ -147,5 +147,21 @@ function updateUid() {
         error: function() {
             alert('Error while request...');
         }
-    })
+    })  ;
+}
+
+function resizeIt() {
+    var element = $('#xmlId');
+    var str = element.text();
+    var cols =  element.attr('cols');
+    console.info(cols);
+    var lineCount = 0 ;
+    var rows = str.split('\n');
+    rows.forEach(function(entry) {
+        var extra =  Math.floor(entry.length/cols);
+        console.info(extra);
+        lineCount += 1 + extra;
+    } );
+
+     element.attr('rows',lineCount);
 }
