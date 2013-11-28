@@ -57,7 +57,7 @@ function receiveJmsMessage() {
 function sendMessage() {
     $('#sendButton').attr('style','display: none');
     var iframeElement = document.getElementById('my_iframe');
-    var xml = iframeElement.contentWindow.document.getElementById('xmlId').innerText;;
+    var xml = iframeElement.contentWindow.document.getElementById('xmlId').value;
     $.ajax({
         type: "post",
         data: ({factoryName : $('#senderHost').val(),

@@ -43,7 +43,7 @@ public class JmsSenderController {
         SendMessagesServiceWebsphereMqImpl.DEFAULT_MQ_CONFIG = mqConfig;
 
         if (xmlString == null || xmlString.trim().length() < 1) {
-            xmlString = "Привет работяга!";
+            xmlString = "Это послание Вы видете, т.к. пользователь послал пустое сообщение!";
         }
 
 
